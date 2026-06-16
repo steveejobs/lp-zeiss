@@ -24,18 +24,19 @@ export function buildWhatsAppUrl(message: string, phone = WHATSAPP_PHONE) {
 }
 
 export const brandColors = {
-  zeissBlue: "#001E82",
-  zeissBlueDeep: "#06114D",
-  night: "#020817",
-  opticalCyan: "#75D9FF",
+  zeissBlue: "#141E8C",
+  zeissBlueDeep: "#0A0F5C",
+  midnight: "#030615",
+  ink: "#070A1F",
+  royal: "#111A86",
   white: "#FFFFFF",
-  silver: "#D8DEE8",
-  graphite: "#111827",
-  text: "#AEB8C8",
+  ice: "#F4F7FF",
+  silver: "#D8DDE8",
+  platinum: "#AEB7C9",
 };
 
 const rawAddress =
-  "Doha Center - Av. José de Brito, 366 - Loja 2 - Setor Anhanguera, Araguaína - TO, 77818-530";
+  "Doha Center - Av. José de Brito, 366 - Loja 2 - Setor Anhanguera, Araguaína - TO, 77818-530, Brasil";
 const encodedAddress = encodeURIComponent(rawAddress);
 
 export const site = {
@@ -52,8 +53,7 @@ export const site = {
   postalCountry: "BR",
   displayAddress:
     "Doha Center - Av. José de Brito, 366 - Loja 2 - Setor Anhanguera, Araguaína - TO",
-  fullAddress:
-    "Doha Center - Av. José de Brito, 366 - Loja 2 - Setor Anhanguera, Araguaína - TO, 77818-530, Brasil",
+  fullAddress: rawAddress,
   phoneDisplay: "+55 63 99301-2626",
   phoneE164: "+5563993012626",
   instagram: "@zeissvisioncenter_araguaina",
@@ -94,8 +94,6 @@ export const site = {
       alt: "Fachada da ZEISS Vision Center Araguaína no Doha Center",
     },
   ],
-  lensImage:
-    "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?auto=format&fit=crop&w=1400&q=82",
   locations: [
     {
       id: "doha-center",
@@ -115,8 +113,8 @@ export const site = {
 
 export const navItems = [
   { label: "Experiência", href: "#experiencia" },
-  { label: "Tecnologias", href: "#rotina" },
-  { label: "Curadoria", href: "#vitrine" },
+  { label: "Tecnologias", href: "#tecnologias" },
+  { label: "Curadoria", href: "#curadoria" },
   { label: "Avaliações", href: "#avaliacoes" },
   { label: "Localização", href: "#contato" },
 ];
@@ -167,7 +165,7 @@ export const testimonials: Testimonial[] = [
   },
   {
     name: "Karina Lagares",
-    text: "Atendimento impecável, equipe atenciosa, grande variedade e lentes de alta qualidade.",
+    text: "Atendimento impecável, equipe atenciosa, variedade e lentes de alta qualidade.",
     rating: 5,
     source: "Google",
   },

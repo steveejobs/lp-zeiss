@@ -3,8 +3,7 @@ import { localBusinessJsonLd, site } from "@/lib/site";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title:
-    "ZEISS Vision Center Araguaína | Lentes ZEISS e Experiência Premium",
+  title: "ZEISS Vision Center Araguaína | Lentes ZEISS e Experiência Premium",
   description:
     "Lentes ZEISS, curadoria de armações e atendimento consultivo em uma experiência premium no Doha Center, em Araguaína.",
   keywords: [
@@ -40,7 +39,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#001E82",
+  themeColor: "#141E8C",
   width: "device-width",
   initialScale: 1,
 };

@@ -1,25 +1,28 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
   BadgeCheck,
   Check,
-  Gem,
+  FileText,
   Instagram,
+  MapPin,
   MessageCircle,
   MonitorSmartphone,
   Search,
   ShieldCheck,
   Sparkles,
-  Star,
 } from "lucide-react";
-import { buildWhatsAppUrl, site, testimonialsSummary, whatsappMessages } from "@/lib/site";
+import DisplayCards from "@/components/ui/display-cards";
+import { HeroMediaLayer } from "@/components/hero/HeroMediaLayer";
+import { PremiumImage } from "@/components/PremiumImage";
+import { premiumImages } from "@/data/premiumImages";
+import { buildWhatsAppUrl, site, whatsappMessages } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Proposta de Experiência Digital Premium | ZEISS Vision Center Araguaína",
   description:
-    "Proposta premium para landing page, concierge Instagram e presença digital da ZEISS Vision Center Araguaína.",
+    "Proposta visual premium para home, concierge Instagram e presença digital da ZEISS Vision Center Araguaína.",
   robots: {
     index: false,
     follow: false,
@@ -52,24 +55,24 @@ const plans = [
   {
     name: "Essencial Premium",
     price: "R$ 2.997,00",
-    text: "Base institucional premium para apresentar a marca, reputação local e caminho direto para WhatsApp.",
+    text: "Presença institucional premium com caminho direto para WhatsApp e SEO local.",
   },
   {
     name: "Experiência ZEISS",
     price: "R$ 4.997,00",
-    text: "Landing premium, concierge /instagram, proposta digital, copy completa e prova social refinada.",
+    text: "Home premium, concierge /instagram, proposta digital, copy e prova social refinada.",
     recommended: true,
   },
   {
     name: "Autoridade Local",
     price: "R$ 6.997,00",
-    text: "Experiência completa com camadas adicionais de autoridade, SEO local e refinamento comercial.",
+    text: "Sistema completo com camadas adicionais de autoridade, SEO e refinamento comercial.",
   },
 ];
 
 function ProposalCTA() {
   return (
-    <a className="zp-button zp-button-primary" href={proposalWhatsAppUrl} target="_blank" rel="noopener noreferrer">
+    <a className="proposalx-button proposalx-button-primary" href={proposalWhatsAppUrl} target="_blank" rel="noopener noreferrer">
       Falar sobre a proposta
       <MessageCircle size={18} />
     </a>
@@ -78,67 +81,92 @@ function ProposalCTA() {
 
 export default function ProposalPage() {
   return (
-    <main className="zp-page">
-      <section className="zp-hero" aria-labelledby="zp-title">
-        <div className="zp-shell zp-hero-grid">
+    <main className="proposalx-page">
+      <section className="proposalx-hero" aria-labelledby="proposalx-title">
+        <HeroMediaLayer fallback3D />
+        <div className="proposalx-shell proposalx-hero-grid">
           <div>
-            <Link href="/" className="zp-brand" aria-label="Voltar para home">
-              <Image src={site.logoIcon} alt="ZEISS" width={62} height={62} priority />
+            <Link href="/" className="proposalx-brand" aria-label="Voltar para a home">
+              <PremiumImage
+                src={premiumImages.logo.src}
+                alt="ZEISS"
+                mode="contain"
+                ratio="1 / 1"
+                priority
+                className="proposalx-logo"
+                sizes="64px"
+              />
               <span>ZEISS Vision Center Araguaína</span>
             </Link>
-            <p className="zp-kicker">
+            <p className="proposalx-kicker">
               <Sparkles size={15} />
-              Pitch premium
+              Direção digital premium
             </p>
-            <h1 id="zp-title">
+            <h1 id="proposalx-title">
               Proposta de Experiência Digital Premium para ZEISS Vision Center Araguaína
             </h1>
             <p>
-              Uma presença digital com luxo tecnológico, precisão alemã e atendimento consultivo.
+              A marca já carrega autoridade internacional e forte reputação local. O digital precisa
+              traduzir isso com profundidade, precisão e desejo.
             </p>
-            <div className="zp-actions">
+            <div className="proposalx-actions">
               <ProposalCTA />
-              <Link className="zp-button zp-button-secondary" href="/">
+              <Link href="/" className="proposalx-button proposalx-button-ghost">
                 Ver experiência
                 <ArrowRight size={18} />
               </Link>
             </div>
           </div>
-          <div className="zp-hero-card">
-            <Image src="/galeria%20cole%C3%A7%C3%A3o/qa%20(1).png" alt="ZEISS Vision Center Araguaína" fill sizes="(min-width: 920px) 42vw, 92vw" priority />
-            <div>
-              <span>
-                {Array.from({ length: 5 }).map((_, index) => (
-                  <Star key={index} size={13} fill="currentColor" />
-                ))}
-              </span>
-              <strong>{testimonialsSummary.rating.toFixed(1).replace(".", ",")} no Google</strong>
-              <small>{testimonialsSummary.total} avaliações reais</small>
+
+          <div className="proposalx-mockups" aria-label="Mockups das páginas">
+            <div className="proposalx-mockup proposalx-mockup-home">
+              <PremiumImage
+                src={premiumImages.facadeHero.src}
+                alt={premiumImages.facadeHero.alt}
+                mode="cover"
+                position={premiumImages.facadeHero.position}
+                ratio="4 / 5"
+                priority
+              />
+              <span>Home</span>
+            </div>
+            <div className="proposalx-mockup proposalx-mockup-instagram">
+              <PremiumImage
+                src={premiumImages.storeWide.src}
+                alt={premiumImages.storeWide.alt}
+                mode="cover"
+                position={premiumImages.storeWide.position}
+                ratio="9 / 14"
+              />
+              <span>Instagram Concierge</span>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="zp-section">
-        <div className="zp-shell zp-two-col">
+      <section className="proposalx-section">
+        <div className="proposalx-shell proposalx-diagnosis">
           <div>
-            <p className="zp-eyebrow">Diagnóstico</p>
-            <h2>A marca já carrega autoridade internacional e forte reputação local.</h2>
+            <p className="proposalx-kicker">Diagnóstico</p>
+            <h2>O projeto digital precisa parecer tão premium quanto a experiência dentro da loja.</h2>
           </div>
-          <p>
-            O projeto digital precisa traduzir essa percepção em uma experiência visual superior:
-            mais premium, mais clara, mais memorável e comercialmente orientada para agendamento.
-          </p>
+          <DisplayCards
+            cards={[
+              { title: "Marca", description: "Autoridade internacional", date: "ZEISS" },
+              { title: "Local", description: "5,0 • 117 avaliações", date: "Google" },
+              { title: "Conversão", description: "WhatsApp e rota clara", date: "Doha Center" },
+            ]}
+          />
         </div>
       </section>
 
-      <section className="zp-section">
-        <div className="zp-shell">
-          <div className="zp-section-head">
-            <p className="zp-eyebrow">O que será entregue</p>
-            <h2>Um sistema digital enxuto, sofisticado e pronto para conversão.</h2>
+      <section className="proposalx-section">
+        <div className="proposalx-shell">
+          <div className="proposalx-section-head">
+            <p className="proposalx-kicker">O que será entregue</p>
+            <h2>Um sistema digital com home, concierge e proposta visual.</h2>
           </div>
-          <div className="zp-deliver-grid">
+          <div className="proposalx-deliver-grid">
             {deliverables.map((item) => (
               <span key={item}>
                 <BadgeCheck size={17} />
@@ -149,37 +177,37 @@ export default function ProposalPage() {
         </div>
       </section>
 
-      <section className="zp-section">
-        <div className="zp-shell zp-direction">
+      <section className="proposalx-section">
+        <div className="proposalx-shell proposalx-direction">
           <div>
-            <p className="zp-eyebrow">Direção criativa</p>
+            <p className="proposalx-kicker">Direção criativa</p>
             <h2>Luxo tecnológico, precisão alemã e atendimento consultivo.</h2>
             <p>
-              A experiência visual parte do azul ZEISS profundo, fotografia real da loja,
-              reflexos ópticos, vidro, prata, ritmo editorial e prova social com nomes reais.
+              Azul ZEISS profundo, preto azulado, prata, vidro, reflexos ópticos,
+              fotos reais da loja e animações leves preparadas para evolução futura.
             </p>
           </div>
-          <div className="zp-direction-icons" aria-hidden="true">
-            <Gem />
-            <ShieldCheck />
+          <div className="proposalx-icon-grid" aria-hidden="true">
             <MonitorSmartphone />
             <Instagram />
+            <MapPin />
+            <FileText />
             <Search />
-            <MessageCircle />
+            <ShieldCheck />
           </div>
         </div>
       </section>
 
-      <section className="zp-section">
-        <div className="zp-shell">
-          <div className="zp-section-head">
-            <p className="zp-eyebrow">Planos</p>
-            <h2>Investimento editável no código.</h2>
+      <section className="proposalx-section">
+        <div className="proposalx-shell">
+          <div className="proposalx-section-head">
+            <p className="proposalx-kicker">Investimento</p>
+            <h2>Planos editáveis no código, apresentados com valor.</h2>
           </div>
-          <div className="zp-plan-grid">
+          <div className="proposalx-plan-grid">
             {plans.map((plan) => (
-              <article className={plan.recommended ? "zp-plan is-recommended" : "zp-plan"} key={plan.name}>
-                {plan.recommended ? <span className="zp-recommended">Recomendado</span> : null}
+              <article className={plan.recommended ? "is-recommended" : ""} key={plan.name}>
+                {plan.recommended ? <span>Recomendado</span> : null}
                 <h3>{plan.name}</h3>
                 <strong>{plan.price}</strong>
                 <p>{plan.text}</p>
@@ -190,11 +218,11 @@ export default function ProposalPage() {
                   </li>
                   <li>
                     <Check size={16} />
-                    WhatsApp estratégico
+                    Mobile refinado
                   </li>
                   <li>
                     <Check size={16} />
-                    Mobile responsivo
+                    WhatsApp estratégico
                   </li>
                 </ul>
               </article>
@@ -203,12 +231,17 @@ export default function ProposalPage() {
         </div>
       </section>
 
-      <section className="zp-final" aria-labelledby="zp-final-title">
-        <div className="zp-shell zp-final-panel">
-          <Image src={site.logoIcon} alt="ZEISS" width={70} height={70} />
-          <h2 id="zp-final-title">
-            Vamos colocar o digital no mesmo nível da experiência dentro da loja.
-          </h2>
+      <section className="proposalx-final">
+        <div className="proposalx-shell">
+          <PremiumImage
+            src={premiumImages.logo.src}
+            alt="ZEISS"
+            mode="contain"
+            ratio="1 / 1"
+            className="proposalx-final-logo"
+            sizes="72px"
+          />
+          <h2>Vamos colocar o digital no mesmo nível da experiência dentro da loja.</h2>
           <ProposalCTA />
         </div>
       </section>

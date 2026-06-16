@@ -1,29 +1,24 @@
 "use client";
 
-import Image from "next/image";
+import { useState } from "react";
+import type { CSSProperties, ReactNode } from "react";
+import { motion } from "framer-motion";
 import {
   ArrowRight,
-  ChevronDown,
-  ExternalLink,
   Instagram,
-  MapPin,
   MessageCircle,
   ShieldCheck,
   Sparkles,
   Star,
 } from "lucide-react";
-import { useState } from "react";
-import { site, testimonials, testimonialsSummary } from "@/lib/site";
-
-const logo = site.logoIcon;
-const images = {
-  facade: "/galeria%20cole%C3%A7%C3%A3o/qa%20(1).png",
-  store: "/galeria%20cole%C3%A7%C3%A3o/qa%20(4).png",
-  storeWide: "/galeria%20cole%C3%A7%C3%A3o/qa%20(5).png",
-  interior: "/galeria%20cole%C3%A7%C3%A3o/qa%20(2).png",
-  facadeWide: "/galeria%20cole%C3%A7%C3%A3o/qa%20(3).png",
-  glasses: "/assets/glasses/eyeglasses-hero.webp",
-};
+import DisplayCards from "@/components/ui/display-cards";
+import { FullMapSection } from "@/components/FullMapSection";
+import { HeroMediaLayer } from "@/components/hero/HeroMediaLayer";
+import { PremiumImage } from "@/components/PremiumImage";
+import { PremiumTestimonialsStage } from "@/components/PremiumTestimonialsStage";
+import { SparklesCore } from "@/components/ui/sparkles";
+import { premiumImages } from "@/data/premiumImages";
+import { site, testimonialsSummary } from "@/lib/site";
 
 const proof = [
   ["5,0", "no Google"],
@@ -34,90 +29,94 @@ const proof = [
 
 const routines = [
   {
-    label: "Trabalho em telas",
-    title: "Precisão para alternar foco sem perder conforto.",
-    text: "Para quem alterna entre celular, computador, leitura e reuniões, a escolha da lente precisa considerar distância, postura, foco e conforto ao longo do dia.",
-    detail: "Rotina digital, leitura curta, reuniões e jornadas longas.",
+    label: "Telas e trabalho",
+    title: "Foco confortável entre tela, leitura e reunião.",
+    text: "A lente certa não é apenas grau. É rotina, conforto, precisão e estilo.",
+    image: premiumImages.glassesProduct,
   },
   {
-    label: "Direção à noite",
-    title: "Mais segurança percebida em luz baixa e reflexos.",
-    text: "A experiência considera contraste, brilho de faróis, chuva, tempo de resposta visual e estabilidade para dirigir com mais tranquilidade.",
-    detail: "Ideal para quem dirige à noite ou pega estrada com frequência.",
+    label: "Direção noturna",
+    title: "Mais controle visual em reflexos e baixa luz.",
+    text: "Para quem dirige à noite e quer uma experiência visual mais estável.",
+    image: premiumImages.facadeHero,
   },
   {
     label: "Sol e ambientes externos",
-    title: "Conforto visual em diferentes condições de luz.",
-    text: "A curadoria avalia rotina externa, sensibilidade à claridade, estética da armação e tecnologias que acompanham a variação de luminosidade.",
-    detail: "Para rua, viagens, campo, sol intenso e transições de ambiente.",
+    title: "Conforto para luz, rua, viagens e transições.",
+    text: "Tecnologias que acompanham diferentes condições de luminosidade.",
+    image: premiumImages.storeWide,
   },
   {
-    label: "Lentes multifocais",
-    title: "Adaptação guiada para enxergar em várias distâncias.",
-    text: "Uma escolha multifocal premium pede medida, desenho de lente, armação correta e orientação próxima para tornar a adaptação mais segura.",
-    detail: "Perto, intermediário e longe com orientação consultiva.",
+    label: "Multifocal",
+    title: "Perto, intermediário e longe com orientação.",
+    text: "Escolha com calma. Enxergue com precisão.",
+    image: premiumImages.storeDesk,
   },
   {
     label: "Estilo e armação",
-    title: "Uma peça que muda presença, proporção e expressão.",
-    text: "A equipe ajuda a equilibrar formato do rosto, material, cor, peso, ajuste e rotina de uso para a armação parecer natural e sofisticada.",
-    detail: "Curadoria para uso diário, ocasiões e imagem pessoal.",
+    title: "Presença, proporção e encaixe no rosto.",
+    text: "Armações pensadas para sua presença, sua rotina e sua visão.",
+    image: premiumImages.storeCurved,
   },
   {
     label: "Primeira experiência ZEISS",
     title: "Um primeiro contato com tecnologia visual premium.",
-    text: "A conversa começa pela sua rotina: onde você sente esforço, quais ambientes frequenta e o que espera de uma lente ZEISS.",
-    detail: "Para entender opções sem pressa e com orientação clara.",
+    text: "No Doha Center, uma experiência óptica à altura da marca ZEISS.",
+    image: premiumImages.facadeWide,
   },
 ];
 
-const lenses = [
+const lensCards = [
   {
-    name: "SmartLife",
-    text: "Para uma rotina conectada, dinâmica e em constante mudança de foco.",
+    title: "SmartLife",
+    text: "Para uma rotina conectada e dinâmica.",
   },
   {
-    name: "DriveSafe",
-    text: "Para quem dirige e busca mais conforto em situações de reflexo e baixa luminosidade.",
+    title: "DriveSafe",
+    text: "Para dirigir com mais conforto em reflexos e baixa luminosidade.",
   },
   {
-    name: "PhotoFusion X",
-    text: "Lentes fotocromáticas premium que acompanham diferentes condições de luz.",
+    title: "PhotoFusion X",
+    text: "Fotocromáticas premium para diferentes condições de luz.",
   },
   {
-    name: "DuraVision",
+    title: "DuraVision",
     text: "Tratamento premium para nitidez, estética e limpeza facilitada.",
   },
 ];
 
 const faqs = [
-  {
-    question: "A equipe ajuda a escolher a lente ideal?",
-    answer:
-      "Sim. A conversa parte da sua receita, rotina, armação e ambientes de uso para orientar a escolha com mais segurança.",
-  },
-  {
-    question: "Posso chamar pelo WhatsApp antes de ir?",
-    answer:
-      "Pode. O WhatsApp é o caminho mais rápido para tirar dúvidas e combinar o melhor momento para atendimento.",
-  },
-  {
-    question: "Onde fica a ZEISS Vision Center Araguaína?",
-    answer:
-      "No Doha Center, Av. José de Brito, 366, Loja 2, Setor Anhanguera, em Araguaína.",
-  },
-  {
-    question: "A loja trabalha com lentes ZEISS?",
-    answer:
-      "Sim. A ZEISS Vision Center Araguaína trabalha com lentes ZEISS e orientação consultiva para sua rotina visual.",
-  },
+  ["A equipe ajuda a escolher a lente ideal?", "Sim. A orientação considera receita, rotina, armação e ambiente de uso."],
+  ["Posso chamar pelo WhatsApp antes de ir?", "Pode. A equipe orienta dúvidas iniciais e ajuda a combinar o atendimento."],
+  ["Onde fica a ZEISS Vision Center Araguaína?", "No Doha Center, Av. José de Brito, 366, Loja 2, Setor Anhanguera."],
+  ["A loja trabalha com lentes ZEISS?", "Sim. A loja trabalha com lentes ZEISS e atendimento consultivo."],
 ];
 
-function Stars({ compact = false }: { compact?: boolean }) {
+function SectionReveal({
+  children,
+  className,
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
   return (
-    <span className={compact ? "zpv-stars is-compact" : "zpv-stars"} aria-label="5 estrelas">
+    <motion.section
+      className={className}
+      initial={{ opacity: 0, y: 34 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+    >
+      {children}
+    </motion.section>
+  );
+}
+
+function StarsLine() {
+  return (
+    <span className="zpx-stars" aria-label="5 estrelas">
       {Array.from({ length: 5 }).map((_, index) => (
-        <Star key={index} size={compact ? 12 : 14} fill="currentColor" />
+        <Star key={index} size={13} fill="currentColor" />
       ))}
     </span>
   );
@@ -128,112 +127,137 @@ export function ZeissPrivateVisionExperience() {
   const routine = routines[activeRoutine];
 
   return (
-    <div className="zpv-page">
-      <header className="zpv-header">
-        <a href="#top" className="zpv-brand" aria-label="ZEISS Vision Center Araguaína">
-          <Image src={logo} alt="ZEISS" width={54} height={54} priority />
+    <div className="zpx-page">
+      <header className="zpx-header">
+        <a href="#top" className="zpx-brand" aria-label="ZEISS Vision Center Araguaína">
+          <PremiumImage
+            src={premiumImages.logo.src}
+            alt="ZEISS"
+            mode="contain"
+            ratio="1 / 1"
+            priority
+            className="zpx-brand-logo"
+            sizes="58px"
+          />
           <span>
             <strong>ZEISS Vision Center</strong>
             <small>Araguaína</small>
           </span>
         </a>
-        <nav className="zpv-nav" aria-label="Navegação principal">
-          <a href="#experiencia">Experiência</a>
+        <nav className="zpx-nav" aria-label="Navegação principal">
           <a href="#rotina">Rotina visual</a>
           <a href="#curadoria">Curadoria</a>
-          <a href="#avaliacoes">Avaliações</a>
+          <a href="#tecnologias">Tecnologias</a>
           <a href="#contato">Localização</a>
         </nav>
-        <a className="zpv-header-cta" href={site.whatsappUrl} target="_blank" rel="noopener noreferrer">
-          <MessageCircle size={17} />
+        <a className="zpx-header-action" href={site.whatsappUrl} target="_blank" rel="noopener noreferrer">
           Agendar
+          <MessageCircle size={17} />
         </a>
       </header>
 
       <main id="top">
-        <section className="zpv-hero" aria-labelledby="zpv-hero-title">
-          <div className="zpv-optic-lines" aria-hidden="true" />
-          <div className="zpv-shell zpv-hero-grid">
-            <div className="zpv-hero-copy">
-              <Image src={logo} alt="ZEISS" width={76} height={76} priority className="zpv-hero-logo" />
-              <div className="zpv-kicker">
+        <section className="zpx-hero" aria-labelledby="zpx-title">
+          <HeroMediaLayer fallback3D />
+          <div className="zpx-shell zpx-hero-grid">
+            <div className="zpx-hero-copy">
+              <PremiumImage
+                src={premiumImages.logo.src}
+                alt="ZEISS"
+                mode="contain"
+                ratio="1 / 1"
+                priority
+                className="zpx-hero-logo"
+                sizes="84px"
+              />
+              <p className="zpx-kicker">
                 <Sparkles size={15} />
                 ZEISS Private Vision Experience
-              </div>
-              <h1 id="zpv-hero-title">
-                Tecnologia ZEISS. Precisão para quem exige mais da própria visão.
-              </h1>
+              </p>
+              <h1 id="zpx-title">Precisão ZEISS para quem exige mais da própria visão.</h1>
               <p>
                 No Doha Center, em Araguaína, uma experiência premium para escolher lentes ZEISS,
                 armações selecionadas e soluções visuais alinhadas à sua rotina.
               </p>
-              <div className="zpv-rating-pill">
-                <Stars compact />
+              <div className="zpx-hero-rating">
+                <StarsLine />
                 <strong>5,0 no Google</strong>
                 <span>117 avaliações</span>
               </div>
-              <div className="zpv-hero-actions">
-                <a className="zpv-button zpv-button-primary" href={site.whatsappUrl} target="_blank" rel="noopener noreferrer">
+              <div className="zpx-actions">
+                <a className="zpx-button zpx-button-primary" href={site.whatsappUrl} target="_blank" rel="noopener noreferrer">
                   Agendar experiência ZEISS
                   <MessageCircle size={18} />
                 </a>
-                <a className="zpv-button zpv-button-secondary" href="#experiencia">
-                  Conhecer a experiência
-                  <ChevronDown size={18} />
+                <a className="zpx-button zpx-button-ghost" href="#tecnologias">
+                  Conhecer tecnologias
+                  <ArrowRight size={18} />
                 </a>
               </div>
-              <p className="zpv-microcopy">Atendimento consultivo no Doha Center.</p>
+              <small>Atendimento consultivo • Doha Center • Araguaína</small>
             </div>
-            <div className="zpv-hero-visual" aria-label="Fachada da ZEISS Vision Center Araguaína">
-              <div className="zpv-hero-photo">
-                <Image src={images.facade} alt="Fachada da ZEISS Vision Center Araguaína" fill priority sizes="(min-width: 920px) 48vw, 92vw" />
-              </div>
-              <div className="zpv-floating-panel">
-                <span>Private fitting</span>
-                <strong>Lentes, armações e medidas com orientação individual.</strong>
+
+            <div className="zpx-hero-showcase">
+              <PremiumImage
+                src={premiumImages.facadeHero.src}
+                alt={premiumImages.facadeHero.alt}
+                mode="cover"
+                position={premiumImages.facadeHero.position}
+                ratio="4 / 5"
+                priority
+                sizes="(min-width: 960px) 38vw, 90vw"
+              />
+              <div className="zpx-hero-glass-card">
+                <strong>Private fitting</strong>
+                <span>Lentes, armações e medidas com orientação boutique.</span>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="zpv-proof-section" aria-label="Provas rápidas da ZEISS Vision Center Araguaína">
-          <div className="zpv-shell zpv-proof-grid">
+        <section className="zpx-proof" aria-label="Provas rápidas">
+          <div className="zpx-shell zpx-proof-grid">
             {proof.map(([value, label]) => (
-              <article className="zpv-proof-card" key={value}>
+              <div key={value}>
                 <strong>{value}</strong>
                 <span>{label}</span>
-              </article>
+              </div>
             ))}
           </div>
         </section>
 
-        <section id="experiencia" className="zpv-section zpv-intro-section">
-          <div className="zpv-shell zpv-intro-grid">
+        <SectionReveal className="zpx-section zpx-experience-section">
+          <div className="zpx-shell zpx-split">
             <div>
-              <p className="zpv-eyebrow">Experiência consultiva</p>
-              <h2>Uma jornada óptica com calma, precisão e presença.</h2>
+              <p className="zpx-kicker">Experiência boutique</p>
+              <h2>Tecnologia ZEISS em uma experiência de atendimento boutique.</h2>
+              <p>
+                Escolha com calma. Enxergue com precisão. Uma jornada com curadoria, reputação local
+                e presença internacional.
+              </p>
             </div>
-            <p>
-              A ZEISS Vision Center Araguaína combina tecnologia visual, curadoria de armações e
-              atendimento individual para transformar a escolha dos óculos em uma decisão segura e elegante.
-            </p>
+            <DisplayCards
+              cards={[
+                { title: "Precisão", description: "Rotina, medidas e foco", date: "ZEISS" },
+                { title: "Curadoria", description: "Armações e presença", date: "Boutique" },
+                { title: "Reputação", description: "5,0 • 117 avaliações", date: "Google" },
+              ]}
+            />
           </div>
-        </section>
+        </SectionReveal>
 
-        <section id="rotina" className="zpv-section zpv-routine-section" aria-labelledby="routine-title">
-          <div className="zpv-shell">
-            <div className="zpv-section-head">
-              <p className="zpv-eyebrow">Rotina visual</p>
-              <h2 id="routine-title">Qual rotina visual pede mais precisão?</h2>
-              <p>Escolha uma situação e veja qual experiência ZEISS conversa melhor com o seu dia.</p>
+        <SectionReveal className="zpx-section zpx-routine-section" >
+          <div className="zpx-shell">
+            <div className="zpx-section-head">
+              <p className="zpx-kicker">Sua rotina visual</p>
+              <h2>Sua rotina visual pede uma lente diferente.</h2>
             </div>
-
-            <div className="zpv-routine-layout">
-              <div className="zpv-routine-tabs" role="tablist" aria-label="Rotinas visuais">
+            <div className="zpx-routine-grid">
+              <div className="zpx-routine-tabs" role="tablist" aria-label="Rotinas visuais">
                 {routines.map((item, index) => (
                   <button
-                    key={item.label}
                     type="button"
+                    key={item.label}
                     className={index === activeRoutine ? "is-active" : ""}
                     onClick={() => setActiveRoutine(index)}
                     role="tab"
@@ -243,176 +267,142 @@ export function ZeissPrivateVisionExperience() {
                   </button>
                 ))}
               </div>
-              <article className="zpv-routine-card">
-                <span>Experiência indicada</span>
-                <h3>{routine.title}</h3>
-                <p>{routine.text}</p>
-                <small>{routine.detail}</small>
+              <motion.article
+                className="zpx-routine-card"
+                key={routine.label}
+                initial={{ opacity: 0, scale: 0.98 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.35 }}
+              >
+                <PremiumImage
+                  src={routine.image.src}
+                  alt={routine.image.alt}
+                  mode={routine.image.fit}
+                  position={routine.image.position}
+                  ratio="16 / 10"
+                  sizes="(min-width: 900px) 48vw, 92vw"
+                />
+                <div>
+                  <span>Consultoria ZEISS</span>
+                  <h3>{routine.title}</h3>
+                  <p>{routine.text}</p>
+                  <a href={site.whatsappUrl} target="_blank" rel="noopener noreferrer">
+                    Conversar sobre minha rotina
+                    <ArrowRight size={17} />
+                  </a>
+                </div>
+              </motion.article>
+            </div>
+          </div>
+        </SectionReveal>
+
+        <SectionReveal className="zpx-section zpx-curation-section" >
+          <div className="zpx-shell zpx-section-head">
+            <p className="zpx-kicker">Vitrine editorial</p>
+            <h2>Curadoria óptica com assinatura ZEISS.</h2>
+            <p>Lentes, armações e orientação consultiva para transformar escolha em experiência.</p>
+          </div>
+          <div className="zpx-shell zpx-editorial-grid" id="curadoria">
+            <PremiumImage
+              src={premiumImages.storeWide.src}
+              alt={premiumImages.storeWide.alt}
+              mode="cover"
+              position={premiumImages.storeWide.position}
+              ratio="16 / 10"
+              className="zpx-editorial-main"
+            />
+            <PremiumImage
+              src={premiumImages.glassesProduct.src}
+              alt={premiumImages.glassesProduct.alt}
+              mode="contain"
+              ratio="16 / 10"
+              className="zpx-editorial-product"
+            />
+            <PremiumImage
+              src={premiumImages.storeCurved.src}
+              alt={premiumImages.storeCurved.alt}
+              mode="cover"
+              position={premiumImages.storeCurved.position}
+              ratio="16 / 10"
+            />
+            <div className="zpx-editorial-strip">
+              <span>Design</span>
+              <span>Proporção</span>
+              <span>Conforto</span>
+              <span>Presença</span>
+            </div>
+          </div>
+        </SectionReveal>
+
+        <SectionReveal className="zpx-section zpx-tech-section" >
+          <div className="zpx-shell zpx-section-head" id="tecnologias">
+            <p className="zpx-kicker">Tecnologias ZEISS</p>
+            <h2>Quatro assinaturas para uma visão mais precisa.</h2>
+          </div>
+          <div className="zpx-shell zpx-lens-stage">
+            {lensCards.map((lens, index) => (
+              <article key={lens.title} style={{ "--lens-index": index } as CSSProperties}>
+                <div className="zpx-lens-orb" />
+                <h3>{lens.title}</h3>
+                <p>{lens.text}</p>
                 <a href={site.whatsappUrl} target="_blank" rel="noopener noreferrer">
-                  Conversar sobre minha rotina
-                  <ArrowRight size={17} />
+                  Conversar sobre essa lente
                 </a>
               </article>
-            </div>
+            ))}
           </div>
-        </section>
+        </SectionReveal>
 
-        <section className="zpv-section zpv-lenses-section" aria-labelledby="lenses-title">
-          <div className="zpv-shell">
-            <div className="zpv-section-head">
-              <p className="zpv-eyebrow">ZEISS Signature Lenses</p>
-              <h2 id="lenses-title">Tecnologias escolhidas pela vida real.</h2>
-            </div>
-            <div className="zpv-lens-grid">
-              {lenses.map((lens) => (
-                <article className="zpv-lens-card" key={lens.name}>
-                  <Image src={images.glasses} alt="" fill sizes="(min-width: 900px) 25vw, 90vw" />
-                  <div>
-                    <strong>{lens.name}</strong>
-                    <p>{lens.text}</p>
-                    <a href={site.whatsappUrl} target="_blank" rel="noopener noreferrer">
-                      Consultar opção
-                    </a>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
+        <FullMapSection />
 
-        <section id="curadoria" className="zpv-section zpv-gallery-section" aria-labelledby="gallery-title">
-          <div className="zpv-shell zpv-gallery-head">
+        <SectionReveal className="zpx-section zpx-testimonials-section" >
+          <div className="zpx-shell zpx-reviews-head" id="avaliacoes">
             <div>
-              <p className="zpv-eyebrow">Curadoria ZEISS</p>
-              <h2 id="gallery-title">Armações escolhidas como peça de estilo.</h2>
+              <p className="zpx-kicker">Avaliações reais</p>
+              <h2>Prova social com movimento, sem excesso.</h2>
             </div>
-            <p>
-              Design, proporção, conforto e presença. A escolha certa valoriza o rosto e acompanha
-              sua rotina com discrição.
-            </p>
-          </div>
-          <div className="zpv-shell zpv-editorial-gallery">
-            <figure className="zpv-gallery-main">
-              <Image src={images.storeWide} alt="Curadoria de armações ZEISS" fill sizes="(min-width: 900px) 58vw, 92vw" />
-              <figcaption>Curadoria ampla de armações</figcaption>
-            </figure>
-            <figure>
-              <Image src={images.store} alt="Detalhe da loja ZEISS Vision Center" fill sizes="(min-width: 900px) 24vw, 44vw" />
-              <figcaption>Design e proporção</figcaption>
-            </figure>
-            <figure>
-              <Image src={images.interior} alt="Atendimento e tecnologia dentro da ZEISS Vision Center" fill sizes="(min-width: 900px) 24vw, 44vw" />
-              <figcaption>Medidas e orientação</figcaption>
-            </figure>
-            <figure>
-              <Image src={images.facadeWide} alt="Fachada da ZEISS Vision Center Araguaína" fill sizes="(min-width: 900px) 24vw, 92vw" />
-              <figcaption>Loja real no Doha Center</figcaption>
-            </figure>
-          </div>
-        </section>
-
-        <section className="zpv-section zpv-store-section" aria-labelledby="store-title">
-          <div className="zpv-shell zpv-store-grid">
-            <div className="zpv-store-copy">
-              <p className="zpv-eyebrow">Experiência da loja</p>
-              <h2 id="store-title">Uma loja pensada para escolher com calma.</h2>
-              <p>
-                Ambiente elegante, atendimento próximo e orientação técnica para transformar a escolha
-                dos óculos em uma experiência segura, confortável e sofisticada.
-              </p>
-              <div className="zpv-pillars">
-                <span>Atendimento consultivo</span>
-                <span>Curadoria de armações</span>
-                <span>Tecnologia ZEISS</span>
-              </div>
-            </div>
-            <div className="zpv-store-photo">
-              <Image src={images.interior} alt="Interior da ZEISS Vision Center Araguaína" fill sizes="(min-width: 900px) 44vw, 92vw" />
-            </div>
-          </div>
-        </section>
-
-        <section id="avaliacoes" className="zpv-section zpv-testimonials-section" aria-labelledby="reviews-title">
-          <div className="zpv-shell zpv-reviews-head">
             <div>
-              <p className="zpv-eyebrow">Avaliações reais</p>
-              <h2 id="reviews-title">Clientes percebem qualidade no atendimento e nas lentes.</h2>
-            </div>
-            <div className="zpv-review-score">
-              <Stars />
+              <StarsLine />
               <strong>{testimonialsSummary.rating.toFixed(1).replace(".", ",")}</strong>
               <span>{testimonialsSummary.total} avaliações no Google</span>
             </div>
           </div>
-          <div className="zpv-shell zpv-testimonial-track" aria-label="Depoimentos de clientes">
-            {testimonials.slice(0, 6).map((testimonial) => (
-              <article className="zpv-testimonial-card" key={testimonial.name}>
-                <Stars compact />
-                <p>“{testimonial.text}”</p>
-                <strong>{testimonial.name}</strong>
-              </article>
-            ))}
-          </div>
-          <div className="zpv-shell zpv-center-action">
-            <a className="zpv-button zpv-button-primary" href={site.whatsappUrl} target="_blank" rel="noopener noreferrer">
-              Agendar minha experiência ZEISS
-              <MessageCircle size={18} />
-            </a>
-          </div>
-        </section>
+          <PremiumTestimonialsStage />
+        </SectionReveal>
 
-        <section id="contato" className="zpv-section zpv-location-section" aria-labelledby="location-title">
-          <div className="zpv-shell zpv-location-grid">
+        <SectionReveal className="zpx-section zpx-faq-section" >
+          <div className="zpx-shell zpx-faq-grid">
             <div>
-              <p className="zpv-eyebrow">Localização premium</p>
-              <h2 id="location-title">ZEISS Vision Center Araguaína no Doha Center.</h2>
-              <div className="zpv-address-card">
-                <strong>Doha Center</strong>
-                <span>Av. José de Brito, 366 - Loja 2</span>
-                <span>Setor Anhanguera</span>
-                <span>Araguaína - TO</span>
-                <span className="zpv-phone">{site.phoneDisplay}</span>
-              </div>
-              <div className="zpv-location-actions">
-                <a className="zpv-button zpv-button-secondary" href={site.mapsRouteUrl} target="_blank" rel="noopener noreferrer">
-                  Como chegar
-                  <MapPin size={18} />
-                </a>
-                <a className="zpv-button zpv-button-primary" href={site.whatsappUrl} target="_blank" rel="noopener noreferrer">
-                  Agendar atendimento
-                  <MessageCircle size={18} />
-                </a>
-              </div>
+              <p className="zpx-kicker">FAQ</p>
+              <h2>Perguntas rápidas antes da visita.</h2>
             </div>
-            <div className="zpv-map-panel">
-              <iframe title="Mapa ZEISS Vision Center Araguaína" src={site.mapsEmbedUrl} loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
-            </div>
-          </div>
-        </section>
-
-        <section className="zpv-section zpv-faq-section" aria-labelledby="faq-title">
-          <div className="zpv-shell zpv-faq-grid">
             <div>
-              <p className="zpv-eyebrow">FAQ</p>
-              <h2 id="faq-title">Perguntas rápidas antes da visita.</h2>
-            </div>
-            <div className="zpv-faq-list">
-              {faqs.map((faq) => (
-                <details key={faq.question}>
-                  <summary>{faq.question}</summary>
-                  <p>{faq.answer}</p>
+              {faqs.map(([question, answer]) => (
+                <details key={question}>
+                  <summary>{question}</summary>
+                  <p>{answer}</p>
                 </details>
               ))}
             </div>
           </div>
-        </section>
+        </SectionReveal>
 
-        <section className="zpv-final-section" aria-labelledby="final-title">
-          <div className="zpv-shell zpv-final-panel">
-            <ShieldCheck size={34} />
-            <h2 id="final-title">Veja sua rotina com mais precisão.</h2>
+        <section className="zpx-final-cta">
+          <div className="zpx-final-sparkles">
+            <SparklesCore
+              background="transparent"
+              minSize={0.35}
+              maxSize={1.1}
+              particleDensity={80}
+              particleColor="#D8DDE8"
+              speed={0.7}
+            />
+          </div>
+          <div className="zpx-shell zpx-final-content">
+            <ShieldCheck size={36} />
+            <h2>Veja sua rotina com mais precisão.</h2>
             <p>Agende uma experiência ZEISS e escolha lentes e armações com orientação consultiva.</p>
-            <a className="zpv-button zpv-button-primary" href={site.whatsappUrl} target="_blank" rel="noopener noreferrer">
+            <a className="zpx-button zpx-button-primary" href={site.whatsappUrl} target="_blank" rel="noopener noreferrer">
               Agendar pelo WhatsApp
               <MessageCircle size={18} />
             </a>
@@ -420,10 +410,17 @@ export function ZeissPrivateVisionExperience() {
         </section>
       </main>
 
-      <footer className="zpv-footer">
-        <div className="zpv-shell zpv-footer-grid">
-          <a href="#top" className="zpv-brand">
-            <Image src={logo} alt="ZEISS" width={46} height={46} />
+      <footer className="zpx-footer">
+        <div className="zpx-shell">
+          <a href="#top" className="zpx-brand">
+            <PremiumImage
+              src={premiumImages.logo.src}
+              alt="ZEISS"
+              mode="contain"
+              ratio="1 / 1"
+              className="zpx-brand-logo"
+              sizes="46px"
+            />
             <span>
               <strong>ZEISS Vision Center</strong>
               <small>Araguaína</small>
@@ -434,17 +431,13 @@ export function ZeissPrivateVisionExperience() {
               <Instagram size={16} />
               {site.instagram}
             </a>
-            <a href={site.mapsRouteUrl} target="_blank" rel="noopener noreferrer">
-              <ExternalLink size={16} />
-              Doha Center, Araguaína
+            <a href={site.whatsappUrl} target="_blank" rel="noopener noreferrer">
+              <MessageCircle size={16} />
+              {site.phoneDisplay}
             </a>
           </div>
         </div>
       </footer>
-
-      <a className="zpv-floating-whatsapp" href={site.whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label="Agendar experiência ZEISS pelo WhatsApp">
-        <MessageCircle size={23} />
-      </a>
     </div>
   );
 }
