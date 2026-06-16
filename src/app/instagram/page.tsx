@@ -1,62 +1,65 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import {
-  ChevronRight,
-  Glasses,
+  ArrowRight,
   Instagram,
   MapPin,
   MessageCircle,
+  MonitorSmartphone,
+  Quote,
   Star,
 } from "lucide-react";
 import { site, testimonialsSummary } from "@/lib/site";
-import { testimonials } from "@/data/testimonials";
 
-const links = [
+const images = {
+  logo: site.logoIcon,
+  main: "/galeria%20cole%C3%A7%C3%A3o/qa%20(5).png",
+  sideA: "/galeria%20cole%C3%A7%C3%A3o/qa%20(1).png",
+  sideB: "/galeria%20cole%C3%A7%C3%A3o/qa%20(4).png",
+};
+
+const conciergeLinks = [
   {
-    label: "Agendar atendimento pelo WhatsApp",
-    href: site.whatsappUrl,
-    icon: MessageCircle,
-    primary: true,
-  },
-  {
-    label: "Conhecer lentes ZEISS",
+    title: "Lentes para minha rotina",
+    text: "Telas, direção, leitura e conforto visual.",
     href: "/#rotina",
-    icon: Glasses,
+    icon: MonitorSmartphone,
   },
   {
-    label: "Ver avaliações",
-    href: "/#avaliacoes",
-    icon: Star,
-  },
-  {
-    label: "Como chegar ao Doha Center",
+    title: "Ver localização",
+    text: "Doha Center, Setor Anhanguera.",
     href: site.mapsRouteUrl,
     icon: MapPin,
   },
   {
-    label: "Instagram oficial",
+    title: "Avaliações de clientes",
+    text: "5,0 no Google.",
+    href: "/#avaliacoes",
+    icon: Star,
+  },
+  {
+    title: "Instagram oficial",
+    text: "@zeissvisioncenter_araguaina",
     href: site.instagramUrl,
     icon: Instagram,
   },
 ];
 
-const gallery = [site.heroImage, ...site.storeImages.map((image) => image.src)].slice(0, 4);
-
 export const metadata: Metadata = {
-  title: "ZEISS Vision Center Araguaína | Links",
+  title: "ZEISS Concierge | ZEISS Vision Center Araguaína",
   description:
-    "Precisão alemã, lentes premium e atendimento consultivo na ZEISS Vision Center Araguaína.",
+    "Entrada rápida premium da ZEISS Vision Center Araguaína para WhatsApp, localização, avaliações e Instagram oficial.",
   alternates: {
     canonical: "/instagram",
   },
   openGraph: {
-    title: "ZEISS Vision Center Araguaína | Links",
+    title: "ZEISS Concierge | ZEISS Vision Center Araguaína",
     description:
-      "Precisão alemã, lentes premium e atendimento consultivo em Araguaína.",
+      "Lentes ZEISS, armações premium e atendimento consultivo no Doha Center.",
     type: "website",
     images: [
       {
-        url: site.heroImage,
+        url: images.main,
         width: 1200,
         height: 630,
         alt: "ZEISS Vision Center Araguaína",
@@ -65,108 +68,102 @@ export const metadata: Metadata = {
   },
 };
 
+function StarsLine() {
+  return (
+    <span className="zc-stars" aria-label="5 estrelas">
+      {Array.from({ length: 5 }).map((_, index) => (
+        <Star key={index} size={12} fill="currentColor" />
+      ))}
+    </span>
+  );
+}
+
 export default function InstagramBioPage() {
   return (
-    <main className="instagram-page luxury-link-page">
-      <section className="instagram-hero" aria-labelledby="instagram-title">
-        <div className="instagram-shell">
-          <Image
-            src={site.logoIcon}
-            alt="ZEISS"
-            width={82}
-            height={82}
-            priority
-            className="instagram-logo"
-          />
-
-          <h1 id="instagram-title">ZEISS Vision Center Araguaína</h1>
-          <p className="instagram-intro">
-            Precisão alemã, lentes premium e atendimento consultivo.
-          </p>
-
-          <div className="instagram-rating-card">
-            <span className="instagram-rating-stars" aria-hidden="true">
-              {Array.from({ length: 5 }).map((_, index) => (
-                <Star key={index} size={14} fill="currentColor" />
-              ))}
-            </span>
-            <strong>
-              {testimonialsSummary.rating.toFixed(1).replace(".", ",")} no
-              Google • {testimonialsSummary.total} avaliações
-            </strong>
-          </div>
-
-          <div className="instagram-feature-photo">
-            <Image
-              src={site.heroImage}
-              alt="ZEISS Vision Center Araguaína"
-              fill
-              priority
-              sizes="(max-width: 720px) 92vw, 520px"
-            />
+    <main className="zc-page">
+      <section className="zc-hero" aria-labelledby="zc-title">
+        <div className="zc-light-lines" aria-hidden="true" />
+        <div className="zc-shell">
+          <Image src={images.logo} alt="ZEISS" width={68} height={68} priority className="zc-logo" />
+          <p className="zc-kicker">ZEISS Concierge</p>
+          <h1 id="zc-title">ZEISS Vision Center Araguaína</h1>
+          <p>Lentes ZEISS, armações premium e atendimento consultivo no Doha Center.</p>
+          <div className="zc-rating">
+            <StarsLine />
+            <strong>{testimonialsSummary.rating.toFixed(1).replace(".", ",")}</strong>
+            <span>{testimonialsSummary.total} avaliações</span>
           </div>
         </div>
       </section>
 
-      <section
-        className="instagram-links instagram-shell"
-        aria-label="Links principais"
-      >
-        {links.map((link) => {
+      <section className="zc-shell zc-main-invite" aria-labelledby="zc-invite-title">
+        <div>
+          <span>Convite privado</span>
+          <h2 id="zc-invite-title">Agende sua experiência ZEISS</h2>
+          <p>
+            Fale com a equipe e receba orientação para escolher lentes e armações com mais segurança.
+          </p>
+        </div>
+        <a href={site.whatsappUrl} target="_blank" rel="noopener noreferrer">
+          Chamar no WhatsApp
+          <MessageCircle size={18} />
+        </a>
+      </section>
+
+      <section className="zc-shell zc-link-grid" aria-label="Ações rápidas">
+        {conciergeLinks.map((link) => {
           const Icon = link.icon;
           const external = link.href.startsWith("http");
 
           return (
             <a
-              key={link.label}
               href={link.href}
-              className={`instagram-main-link ${link.primary ? "is-primary" : ""}`}
+              key={link.title}
               target={external ? "_blank" : undefined}
               rel={external ? "noopener noreferrer" : undefined}
             >
-              <span className="instagram-main-link-icon">
-                <Icon size={20} aria-hidden="true" />
+              <Icon size={19} aria-hidden="true" />
+              <span>
+                <strong>{link.title}</strong>
+                <small>{link.text}</small>
               </span>
-              <span>{link.label}</span>
-              <ChevronRight size={18} aria-hidden="true" />
+              <ArrowRight size={16} aria-hidden="true" />
             </a>
           );
         })}
       </section>
 
-      <section className="instagram-gallery instagram-shell" aria-label="Galeria">
-        {gallery.map((src, index) => (
-          <div className="instagram-gallery-image" key={src}>
-            <Image
-              src={src}
-              alt={`Detalhe premium ZEISS ${index + 1}`}
-              fill
-              sizes="(max-width: 720px) 44vw, 220px"
-              loading="lazy"
-            />
-          </div>
-        ))}
-      </section>
-
-      <section
-        className="instagram-testimonials instagram-shell"
-        aria-labelledby="instagram-testimonials-title"
-      >
-        <h2 id="instagram-testimonials-title">Clientes percebem a diferença</h2>
-        <div className="instagram-testimonial-grid">
-          {testimonials.slice(0, 3).map((testimonial) => (
-            <article key={testimonial.name}>
-              <p>{testimonial.text}</p>
-              <strong>{testimonial.name}</strong>
-            </article>
-          ))}
+      <section className="zc-shell zc-showcase" aria-label="Mini vitrine ZEISS">
+        <div className="zc-showcase-main">
+          <Image src={images.main} alt="Interior da ZEISS Vision Center Araguaína" fill sizes="(max-width: 520px) 92vw, 430px" priority />
+        </div>
+        <div>
+          <Image src={images.sideA} alt="Fachada da ZEISS Vision Center Araguaína" fill sizes="(max-width: 520px) 44vw, 190px" />
+        </div>
+        <div>
+          <Image src={images.sideB} alt="Curadoria de armações ZEISS" fill sizes="(max-width: 520px) 44vw, 190px" />
         </div>
       </section>
 
-      <footer className="instagram-footer instagram-shell">
-        <span>{site.shortName}</span>
+      <section className="zc-shell zc-featured-review" aria-labelledby="zc-review-title">
+        <Quote size={20} aria-hidden="true" />
+        <h2 id="zc-review-title" className="sr-only">Depoimento em destaque</h2>
+        <p>“Lentes de alta qualidade, leveza e conforto aos olhos.”</p>
+        <strong>Helena Andrade Rocha</strong>
+      </section>
+
+      <section className="zc-shell zc-final">
+        <h2>Fale com a ZEISS Vision Center</h2>
+        <a href={site.whatsappUrl} target="_blank" rel="noopener noreferrer">
+          Agendar pelo WhatsApp
+          <MessageCircle size={18} />
+        </a>
+      </section>
+
+      <footer className="zc-shell zc-footer">
         <a href={site.instagramUrl} target="_blank" rel="noopener noreferrer">
-          {site.instagram}
+          <Instagram size={15} />
+          {site.instagramUrl}
         </a>
       </footer>
     </main>

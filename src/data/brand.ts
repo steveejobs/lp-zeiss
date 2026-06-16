@@ -3,8 +3,8 @@ export const LINA_WHATSAPP_PHONE = WHATSAPP_PHONE;
 
 export const whatsappMessages = {
   site:
-    "Olá, vim pelo site da ZEISS Vision Center Araguaína e quero agendar um atendimento.",
-  bio: "Olá, vim pelo Instagram da ZEISS Vision Center Araguaína e quero agendar um atendimento.",
+    "Olá, vim pelo site da ZEISS Vision Center Araguaína e quero agendar uma experiência ZEISS.",
+  bio: "Olá, vim pelo site da ZEISS Vision Center Araguaína e quero agendar uma experiência ZEISS.",
   frames:
     "Olá, quero conhecer a curadoria de armações premium da ZEISS Vision Center Araguaína.",
   sunglasses:
