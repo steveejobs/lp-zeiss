@@ -5,7 +5,6 @@ import { FocusGallery } from "@/components/FocusGallery";
 import { Footer } from "@/components/Footer";
 import { GoogleReviewsSection } from "@/components/GoogleReviewsSection";
 import { Header } from "@/components/Header";
-import { HeroProofBar } from "@/components/HeroProofBar";
 import { LensHero } from "@/components/LensHero";
 import { ProcessSection } from "@/components/ProcessSection";
 import { RoutineLensSection } from "@/components/RoutineLensSection";
@@ -17,9 +16,8 @@ export default function Home() {
       <Header />
       <main id="top">
         <LensHero />
-        <HeroProofBar />
-        <RoutineLensSection />
         <ProcessSection />
+        <RoutineLensSection />
         <StorePhotosSection />
         <GoogleReviewsSection />
         <FocusGallery />

@@ -79,7 +79,7 @@ export async function getGoogleReviews(): Promise<GoogleReviewsData> {
       .filter((review) => review.text)
       .slice(0, 5)
       .map((review) => ({
-        authorName: review.author_name ?? "Cliente Google",
+        authorName: review.author_name ?? "Cliente ZEISS",
         rating: Math.max(1, Math.min(5, Math.round(review.rating ?? 5))),
         text: review.text ?? "",
         relativeTimeDescription: review.relative_time_description,

@@ -1,85 +1,46 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import {
-  CarFront,
   ChevronRight,
   Glasses,
-  Globe2,
+  Instagram,
   MapPin,
   MessageCircle,
-  MonitorSmartphone,
   Star,
 } from "lucide-react";
-import { TestimonialsMobileMarquee } from "@/components/ui/testimonials-columns-1";
-import {
-  buildWhatsAppUrl,
-  site,
-  testimonialsSummary,
-  whatsappMessages,
-} from "@/lib/site";
+import { site, testimonialsSummary } from "@/lib/site";
 import { testimonials } from "@/data/testimonials";
 
 const links = [
   {
     label: "Agendar atendimento pelo WhatsApp",
     href: site.whatsappUrl,
-    ariaLabel: "Agendar atendimento na ZEISS Vision Center Araguaína pelo WhatsApp",
     icon: MessageCircle,
-    variant: "primary",
+    primary: true,
   },
   {
     label: "Conhecer lentes ZEISS",
     href: "/#rotina",
-    ariaLabel: "Conhecer tecnologias de lentes ZEISS",
     icon: Glasses,
-    variant: "light",
   },
   {
-    label: "Ver avaliações dos clientes",
+    label: "Ver avaliações",
     href: "/#avaliacoes",
-    ariaLabel: "Ver avaliações dos clientes",
     icon: Star,
-    variant: "light",
   },
   {
-    label: "Como chegar",
+    label: "Como chegar ao Doha Center",
     href: site.mapsRouteUrl,
-    ariaLabel: "Abrir localização da ZEISS Vision Center Araguaína",
     icon: MapPin,
-    variant: "light",
   },
   {
-    label: "Falar sobre lentes para dirigir",
-    href: buildWhatsAppUrl(whatsappMessages.drive),
-    ariaLabel: "Falar sobre lentes ZEISS para dirigir",
-    icon: CarFront,
-    variant: "ghost",
+    label: "Instagram oficial",
+    href: site.instagramUrl,
+    icon: Instagram,
   },
-  {
-    label: "Falar sobre lentes para telas",
-    href: buildWhatsAppUrl(whatsappMessages.screens),
-    ariaLabel: "Falar sobre lentes ZEISS para telas",
-    icon: MonitorSmartphone,
-    variant: "ghost",
-  },
-  {
-    label: "Conhecer armações premium",
-    href: buildWhatsAppUrl(whatsappMessages.frames),
-    ariaLabel: "Conhecer armações premium pelo WhatsApp",
-    icon: Globe2,
-    variant: "ghost",
-  },
-] as const;
+];
 
-const showcase = [site.heroImage, ...site.storeImages.map((image) => image.src)]
-  .slice(0, 6)
-  .map((src, index) => ({
-    src,
-    alt:
-      index === 0
-        ? "Fachada da ZEISS Vision Center Araguaína"
-        : "Ambiente premium da ZEISS Vision Center Araguaína",
-  }));
+const gallery = [site.heroImage, ...site.storeImages.map((image) => image.src)].slice(0, 4);
 
 export const metadata: Metadata = {
   title: "ZEISS Vision Center Araguaína | Links",
@@ -95,10 +56,10 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: site.logoIcon,
+        url: site.heroImage,
         width: 1200,
-        height: 1200,
-        alt: "Logo da ZEISS Vision Center Araguaína",
+        height: 630,
+        alt: "ZEISS Vision Center Araguaína",
       },
     ],
   },
@@ -106,55 +67,43 @@ export const metadata: Metadata = {
 
 export default function InstagramBioPage() {
   return (
-    <main className="instagram-page olhar-bio-page">
+    <main className="instagram-page luxury-link-page">
       <section className="instagram-hero" aria-labelledby="instagram-title">
         <div className="instagram-shell">
-          <div className="instagram-brand-lockup">
-            <Image
-              src={site.logoIcon}
-              alt="Logo ZEISS"
-              width={92}
-              height={92}
-              priority
-              className="instagram-logo"
-            />
-            <div>
-              <h1 id="instagram-title">{site.name}</h1>
-              <p>Precisão alemã, lentes premium e atendimento consultivo.</p>
-            </div>
-          </div>
+          <Image
+            src={site.logoIcon}
+            alt="ZEISS"
+            width={82}
+            height={82}
+            priority
+            className="instagram-logo"
+          />
 
+          <h1 id="instagram-title">ZEISS Vision Center Araguaína</h1>
           <p className="instagram-intro">
-            Tecnologia ZEISS, armações selecionadas e uma experiência visual
-            premium em Araguaína.
+            Precisão alemã, lentes premium e atendimento consultivo.
           </p>
 
-          <div className="instagram-rating-card olhar-bio-proof">
+          <div className="instagram-rating-card">
             <span className="instagram-rating-stars" aria-hidden="true">
               {Array.from({ length: 5 }).map((_, index) => (
-                <Star key={index} size={15} fill="currentColor" />
+                <Star key={index} size={14} fill="currentColor" />
               ))}
             </span>
             <strong>
               {testimonialsSummary.rating.toFixed(1).replace(".", ",")} no
               Google • {testimonialsSummary.total} avaliações
             </strong>
-            <span>Referência em experiência óptica em Araguaína</span>
           </div>
 
-          <div className="olhar-bio-showcase" aria-label="Mini vitrine">
-            {showcase.map((image, index) => (
-              <div className="olhar-bio-image" key={`${image.src}-${index}`}>
-                <Image
-                  src={image.src}
-                  alt={image.alt}
-                  fill
-                  sizes="(max-width: 720px) 31vw, 160px"
-                  priority={index === 0}
-                  loading={index === 0 ? undefined : "lazy"}
-                />
-              </div>
-            ))}
+          <div className="instagram-feature-photo">
+            <Image
+              src={site.heroImage}
+              alt="ZEISS Vision Center Araguaína"
+              fill
+              priority
+              sizes="(max-width: 720px) 92vw, 520px"
+            />
           </div>
         </div>
       </section>
@@ -165,15 +114,15 @@ export default function InstagramBioPage() {
       >
         {links.map((link) => {
           const Icon = link.icon;
+          const external = link.href.startsWith("http");
 
           return (
             <a
               key={link.label}
               href={link.href}
-              className={`instagram-main-link is-${link.variant}`}
-              aria-label={link.ariaLabel}
-              target={link.href.startsWith("http") ? "_blank" : undefined}
-              rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
+              className={`instagram-main-link ${link.primary ? "is-primary" : ""}`}
+              target={external ? "_blank" : undefined}
+              rel={external ? "noopener noreferrer" : undefined}
             >
               <span className="instagram-main-link-icon">
                 <Icon size={20} aria-hidden="true" />
@@ -185,60 +134,41 @@ export default function InstagramBioPage() {
         })}
       </section>
 
-      <section
-        id="enderecos"
-        className="instagram-contact instagram-shell"
-        aria-labelledby="contact-title"
-      >
-        <div className="instagram-section-heading">
-          <h2 id="contact-title">Localização</h2>
-        </div>
-
-        <address className="instagram-contact-list">
-          {site.locations.map((location) => (
-            <a
-              href={location.mapUrl}
-              key={location.id}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`Abrir rota para ${site.name}`}
-            >
-              <MapPin size={18} aria-hidden="true" />
-              <span>
-                <strong>{site.name}</strong>
-                <br />
-                {location.address}
-                <br />
-                {location.phoneDisplay}
-              </span>
-            </a>
-          ))}
-        </address>
+      <section className="instagram-gallery instagram-shell" aria-label="Galeria">
+        {gallery.map((src, index) => (
+          <div className="instagram-gallery-image" key={src}>
+            <Image
+              src={src}
+              alt={`Detalhe premium ZEISS ${index + 1}`}
+              fill
+              sizes="(max-width: 720px) 44vw, 220px"
+              loading="lazy"
+            />
+          </div>
+        ))}
       </section>
 
       <section
-        className="instagram-testimonials"
+        className="instagram-testimonials instagram-shell"
         aria-labelledby="instagram-testimonials-title"
       >
-        <div className="instagram-shell instagram-section-heading">
-          <h2 id="instagram-testimonials-title">Clientes percebem a diferença</h2>
+        <h2 id="instagram-testimonials-title">Clientes percebem a diferença</h2>
+        <div className="instagram-testimonial-grid">
+          {testimonials.slice(0, 3).map((testimonial) => (
+            <article key={testimonial.name}>
+              <p>{testimonial.text}</p>
+              <strong>{testimonial.name}</strong>
+            </article>
+          ))}
         </div>
-        <TestimonialsMobileMarquee testimonials={testimonials.slice(0, 6)} />
       </section>
 
       <footer className="instagram-footer instagram-shell">
-        <Star size={15} aria-hidden="true" />
-        <span>{site.shortName} • Araguaína</span>
+        <span>{site.shortName}</span>
+        <a href={site.instagramUrl} target="_blank" rel="noopener noreferrer">
+          {site.instagram}
+        </a>
       </footer>
-
-      <a
-        href={site.whatsappUrl}
-        className="instagram-fixed-cta"
-        aria-label="Agendar atendimento pelo WhatsApp"
-      >
-        <MessageCircle size={19} aria-hidden="true" />
-        <span>Agendar pelo WhatsApp</span>
-      </a>
     </main>
   );
 }

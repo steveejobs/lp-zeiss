@@ -17,7 +17,7 @@ export function Header() {
   }, []);
 
   return (
-    <header className={`site-header ${isScrolled ? "is-scrolled" : ""}`}>
+    <header className={`site-header premium-header ${isScrolled ? "is-scrolled" : ""}`}>
       <div className="site-shell header-inner">
         <a
           href="#top"
@@ -26,15 +26,15 @@ export function Header() {
         >
           <Image
             src={site.logoIcon}
-            width={82}
-            height={82}
+            width={54}
+            height={54}
             alt=""
             priority
             aria-hidden="true"
           />
           <span>
             <strong>{site.shortName}</strong>
-            <small>Araguaína - TO</small>
+            <small>Araguaína, TO</small>
           </span>
         </a>
 
@@ -52,7 +52,7 @@ export function Header() {
             className="header-social-link"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label={`Abrir Instagram da ZEISS Vision Center Araguaína: ${site.instagram}`}
+            aria-label={`Abrir Instagram oficial: ${site.instagram}`}
           >
             <Instagram size={17} aria-hidden="true" />
           </a>
@@ -62,15 +62,15 @@ export function Header() {
             className="button header-route"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Traçar rota até a ZEISS Vision Center Araguaína no Google Maps"
+            aria-label="Traçar rota até a ZEISS Vision Center Araguaína"
           >
-            <Navigation size={17} aria-hidden="true" />
-            Traçar rota
+            <Navigation size={16} aria-hidden="true" />
+            Rota
           </a>
 
           <a href={site.whatsappUrl} className="button button-red header-cta">
-            <MessageCircle size={17} aria-hidden="true" />
-            Chamar no WhatsApp
+            <MessageCircle size={16} aria-hidden="true" />
+            Agendar
           </a>
         </div>
 
@@ -107,29 +107,29 @@ export function Header() {
               onClick={() => setIsOpen(false)}
             >
               <MessageCircle size={17} aria-hidden="true" />
-              Chamar no WhatsApp
+              Agendar atendimento
             </a>
             <a
               href={site.instagramUrl}
               className="button header-route mobile-route"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={`Abrir Instagram da ZEISS Vision Center Araguaína: ${site.instagram}`}
+              aria-label={`Abrir Instagram oficial: ${site.instagram}`}
               onClick={() => setIsOpen(false)}
             >
               <Instagram size={17} aria-hidden="true" />
-              Instagram
+              Instagram oficial
             </a>
             <a
               href={site.mapsRouteUrl}
               className="button header-route mobile-route"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Traçar rota até a ZEISS Vision Center Araguaína no Google Maps"
+              aria-label="Traçar rota até a ZEISS Vision Center Araguaína"
               onClick={() => setIsOpen(false)}
             >
               <Navigation size={17} aria-hidden="true" />
-              Traçar rota
+              Como chegar
             </a>
           </nav>
         </div>

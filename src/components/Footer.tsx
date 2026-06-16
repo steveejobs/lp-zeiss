@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Instagram } from "lucide-react";
+import { Instagram, MessageCircle, Navigation } from "lucide-react";
 import { navItems, site } from "@/lib/site";
 
 export function Footer() {
@@ -14,44 +14,53 @@ export function Footer() {
           >
             <Image
               src={site.logoIcon}
-              width={72}
-              height={72}
+              width={58}
+              height={58}
               alt=""
               aria-hidden="true"
             />
             <span>
               <strong>{site.shortName}</strong>
-              <small>Tecnologia visual em Araguaína-TO</small>
+              <small>Precisão óptica em Araguaína</small>
             </span>
           </a>
           <p>
-            Lentes ZEISS, armações selecionadas e atendimento consultivo para
-            uma experiência visual premium no Setor Anhanguera.
+            Lentes ZEISS, armações selecionadas e atendimento consultivo no Doha
+            Center.
           </p>
         </div>
 
         <address>
-          <strong>Endereço</strong>
-          {site.locations.map((location) => (
-            <span key={location.id}>
-              {location.name}: {location.address} · {location.phoneDisplay}
-            </span>
-          ))}
+          <strong>Doha Center</strong>
+          <span>{site.fullAddress}</span>
+          <a href={site.whatsappUrl} className="footer-social-link">
+            <MessageCircle size={15} aria-hidden="true" />
+            {site.phoneDisplay}
+          </a>
           <a
             href={site.instagramUrl}
             className="footer-social-link"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label={`Abrir Instagram da ZEISS Vision Center Araguaína: ${site.instagram}`}
+            aria-label={`Abrir Instagram oficial: ${site.instagram}`}
           >
             <Instagram size={15} aria-hidden="true" />
-            Instagram: {site.instagram}
+            {site.instagram}
+          </a>
+          <a
+            href={site.mapsRouteUrl}
+            className="footer-social-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Navigation size={15} aria-hidden="true" />
+            Como chegar
           </a>
         </address>
 
         <nav aria-label="Links rápidos do rodapé">
           <strong>Navegação</strong>
-          {navItems.map((item) => (
+          {navItems.slice(0, 4).map((item) => (
             <a key={item.href} href={item.href}>
               {item.label}
             </a>

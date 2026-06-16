@@ -1,65 +1,63 @@
+import { Star } from "lucide-react";
 import { AnimatedReveal } from "@/components/AnimatedReveal";
-import { GoogleRatingBadge } from "@/components/GoogleRatingBadge";
-import {
-  TestimonialsColumn,
-  TestimonialsMobileMarquee,
-} from "@/components/ui/testimonials-columns-1";
 import { testimonials, testimonialsSummary } from "@/data/testimonials";
-
-const firstColumn = testimonials.slice(0, 3);
-const secondColumn = testimonials.slice(3, 6);
-const thirdColumn = testimonials.slice(6, 8);
+import { site } from "@/lib/site";
 
 export function GoogleReviewsSection() {
   return (
     <section
       id="avaliacoes"
-      className="section google-reviews-section testimonials-section"
+      className="section google-reviews-section premium-reviews-section"
       aria-labelledby="google-reviews-title"
     >
       <div className="site-shell testimonials-shell">
         <AnimatedReveal className="section-heading compact testimonials-heading">
-          <p className="eyebrow">Google Reviews</p>
-          <h2 id="google-reviews-title">
-            Quem conhece a ZEISS Vision Center Araguaína percebe a diferença.
-          </h2>
+          <p className="eyebrow">Prova social</p>
+          <h2 id="google-reviews-title">Avaliações que sustentam reputação.</h2>
           <p>
-            Clientes destacam a qualidade das lentes, o atendimento consultivo,
-            a variedade de armações e a experiência premium dentro da loja.
+            Uma seleção breve de clientes que destacam qualidade, conforto,
+            estética e atendimento.
           </p>
         </AnimatedReveal>
 
         <AnimatedReveal className="testimonials-rating-wrap" delay={0.08}>
-          <GoogleRatingBadge
-            variant="card"
-            rating={testimonialsSummary.rating.toFixed(1).replace(".", ",")}
-            reviews={`${testimonialsSummary.total} avaliações`}
-          />
-          <span className="zeiss-review-seal">
-            Referência em experiência óptica em Araguaína
+          <span className="premium-rating-pill">
+            <span aria-hidden="true">
+              {Array.from({ length: 5 }).map((_, index) => (
+                <Star key={index} size={13} fill="currentColor" />
+              ))}
+            </span>
+            <strong>
+              {testimonialsSummary.rating.toFixed(1).replace(".", ",")} no Google
+            </strong>
+            <small>{testimonialsSummary.total} avaliações</small>
           </span>
         </AnimatedReveal>
       </div>
 
-      <div className="site-shell testimonials-columns-wrap testimonials-desktop-marquee">
-        <TestimonialsColumn
-          testimonials={firstColumn}
-          className="testimonials-column"
-          duration={28}
-        />
-        <TestimonialsColumn
-          testimonials={secondColumn}
-          className="testimonials-column testimonials-column-tablet"
-          duration={34}
-        />
-        <TestimonialsColumn
-          testimonials={thirdColumn}
-          className="testimonials-column testimonials-column-desktop"
-          duration={31}
-        />
+      <div className="site-shell premium-review-grid">
+        {testimonials.map((testimonial, index) => (
+          <AnimatedReveal
+            className="premium-review-card"
+            key={testimonial.name}
+            delay={index * 0.035}
+          >
+            <span className="premium-review-stars" aria-hidden="true">
+              {Array.from({ length: 5 }).map((_, starIndex) => (
+                <Star key={starIndex} size={12} fill="currentColor" />
+              ))}
+            </span>
+            <p>{testimonial.text}</p>
+            <strong>{testimonial.name}</strong>
+          </AnimatedReveal>
+        ))}
       </div>
 
-      <TestimonialsMobileMarquee testimonials={testimonials} />
+      <div className="site-shell premium-review-actions">
+        <a href={site.whatsappUrl} className="button button-red">
+          Agendar atendimento
+        </a>
+      </div>
     </section>
   );
 }

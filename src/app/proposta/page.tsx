@@ -5,24 +5,22 @@ import {
   ArrowRight,
   BadgeCheck,
   Check,
-  Eye,
+  Clock3,
   FileText,
   Gem,
-  MapPin,
+  Instagram,
   MessageCircle,
   MousePointer2,
   Search,
   Sparkles,
   Star,
-  Store,
 } from "lucide-react";
-import { AnimatedReveal } from "@/components/AnimatedReveal";
-import { buildWhatsAppUrl, site, testimonialsSummary } from "@/lib/site";
+import { buildWhatsAppUrl, site, testimonialsSummary, whatsappMessages } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Proposta Comercial | ZEISS Vision Center Araguaína",
+  title: "Proposta Digital Premium | ZEISS Vision Center Araguaína",
   description:
-    "Proposta de reposicionamento digital premium para a ZEISS Vision Center Araguaína.",
+    "Proposta de experiência digital premium para a ZEISS Vision Center Araguaína.",
   robots: {
     index: false,
     follow: false,
@@ -36,67 +34,71 @@ export const metadata: Metadata = {
   },
 };
 
-const proposalWhatsAppUrl = buildWhatsAppUrl(
-  "Olá, vi a proposta da ZEISS Vision Center Araguaína e quero aprovar a atualização do projeto.",
-);
+const proposalWhatsAppUrl = buildWhatsAppUrl(whatsappMessages.proposal);
 
-const sections = [
-  {
-    eyebrow: "Diagnóstico",
-    title: "A autoridade da marca já existe.",
-    text: "A ZEISS Vision Center Araguaína já possui forte prova social, reputação local e autoridade de marca. O digital precisa refletir o mesmo padrão percebido dentro da loja: tecnologia, acolhimento, precisão e bom gosto.",
-    icon: BadgeCheck,
-  },
-  {
-    eyebrow: "Oportunidade",
-    title: "Precisão e confiança precisam aparecer rápido.",
-    text: "Quando alguém pesquisa por lentes ZEISS, ótica premium ou atendimento óptico em Araguaína, o site deve transmitir segurança em poucos segundos e conduzir a pessoa ao WhatsApp ou à loja.",
-    icon: Search,
-  },
-  {
-    eyebrow: "Recomendação",
-    title: "Manter o layout premium e trocar a narrativa.",
-    text: "A estrutura visual atual permanece como base. A mudança acontece em identidade, copy, cor, SEO, prova social e experiência para posicionar a unidade como uma franquia internacional de tecnologia visual.",
-    icon: Gem,
-  },
+const problems = [
+  "Presença digital ainda não transmite todo o valor da marca.",
+  "Excesso de informação reduz percepção premium.",
+  "Depoimentos precisam virar prova social de luxo.",
+  "Instagram/linktree deve funcionar como entrada comercial rápida.",
+  "A proposta comercial precisa vender valor, não apenas páginas.",
+];
+
+const solutions = [
+  "Site institucional premium",
+  "Linktree/Instagram exclusivo",
+  "Proposta comercial digital",
+  "Copy de autoridade ZEISS",
+  "Prova social com avaliações reais",
+  "SEO local",
+  "WhatsApp estratégico",
+  "Galeria premium",
 ];
 
 const deliverables = [
-  "Página institucional premium",
-  "Linktree/Instagram premium",
-  "Copy ZEISS com foco em tecnologia e confiança",
-  "Seção de prova social com avaliações",
-  "Galeria premium",
-  "CTA para WhatsApp",
-  "SEO local para Araguaína",
-  "Ajustes responsivos mobile",
+  "Landing page institucional",
+  "Página /instagram",
+  "Página /proposta",
+  "Copy premium",
+  "Tratamento visual de galerias",
+  "Responsividade mobile",
+  "Integração WhatsApp",
+  "Instagram oficial",
+  "Revisão SEO",
+  "Deploy Vercel",
 ];
 
-function ProposalButton({
-  href,
-  children,
-  light = false,
-}: {
-  href: string;
-  children: React.ReactNode;
-  light?: boolean;
-}) {
-  const className = light
-    ? "proposal-button proposal-button-light"
-    : "proposal-button proposal-button-primary";
+const proposalPlans = [
+  {
+    name: "Presença Premium",
+    price: "R$ 2.997,00",
+    description: "Site institucional premium + WhatsApp + SEO local.",
+  },
+  {
+    name: "Experiência ZEISS",
+    price: "R$ 4.997,00",
+    description: "Site premium + /instagram + proposta comercial + copy completa.",
+    recommended: true,
+  },
+  {
+    name: "Autoridade Local",
+    price: "R$ 6.997,00",
+    description:
+      "Experiência completa + refinamento visual + prova social + otimização avançada.",
+  },
+];
 
-  if (href.startsWith("/")) {
-    return (
-      <Link href={href} className={className}>
-        <span>{children}</span>
-        <ArrowRight size={18} aria-hidden="true" />
-      </Link>
-    );
-  }
+const timeline = [
+  "Identidade e estrutura",
+  "Copy e páginas",
+  "Revisão mobile",
+  "Publicação e ajustes finais",
+];
 
+function ProposalButton() {
   return (
-    <a href={href} className={className}>
-      <span>{children}</span>
+    <a href={proposalWhatsAppUrl} className="proposal-button proposal-button-primary">
+      <span>Falar sobre a proposta</span>
       <MessageCircle size={18} aria-hidden="true" />
     </a>
   );
@@ -104,10 +106,10 @@ function ProposalButton({
 
 export default function ProposalPage() {
   return (
-    <main className="proposal-page">
+    <main className="proposal-page premium-proposal-page">
       <section className="proposal-hero" aria-labelledby="proposal-title">
         <div className="proposal-shell proposal-hero-grid">
-          <AnimatedReveal className="proposal-hero-copy">
+          <div className="proposal-hero-copy">
             <Link
               className="proposal-logo"
               href="/"
@@ -115,41 +117,38 @@ export default function ProposalPage() {
             >
               <Image
                 src={site.logoIcon}
-                alt=""
-                width={54}
-                height={54}
+                alt="ZEISS"
+                width={64}
+                height={64}
                 priority
-                aria-hidden="true"
               />
-              <span>{site.name}</span>
+              <span>{site.shortName} Araguaína</span>
             </Link>
 
             <div className="proposal-kicker">
-              <Store size={16} aria-hidden="true" />
-              <span>Site, bio e prova social para uma experiência ZEISS</span>
+              <Sparkles size={16} aria-hidden="true" />
+              <span>Experiência digital premium</span>
             </div>
 
             <h1 id="proposal-title">
-              Uma presença digital à altura de uma marca global de precisão
-              visual.
+              Proposta de Experiência Digital Premium para ZEISS Vision Center
+              Araguaína
             </h1>
             <p>
-              O projeto reposiciona a unidade para comunicar tecnologia alemã,
-              atendimento consultivo, lentes ZEISS e curadoria premium em
-              Araguaína.
+              Uma presença digital à altura da tecnologia, reputação e
+              sofisticação da marca ZEISS.
             </p>
 
             <div className="proposal-hero-actions">
-              <ProposalButton href={proposalWhatsAppUrl}>
-                Aprovar atualização do projeto
-              </ProposalButton>
-              <ProposalButton href="/" light>
-                Ver site
-              </ProposalButton>
+              <ProposalButton />
+              <Link href="/" className="proposal-button proposal-button-light">
+                <span>Ver experiência atualizada</span>
+                <ArrowRight size={18} aria-hidden="true" />
+              </Link>
             </div>
-          </AnimatedReveal>
+          </div>
 
-          <AnimatedReveal className="proposal-hero-visual" delay={0.08}>
+          <div className="proposal-hero-visual">
             <div className="proposal-rating-card">
               <span className="proposal-rating-stars" aria-hidden="true">
                 {Array.from({ length: 5 }).map((_, index) => (
@@ -160,110 +159,154 @@ export default function ProposalPage() {
                 {testimonialsSummary.rating.toFixed(1).replace(".", ",")} no
                 Google
               </strong>
-              <span>{testimonialsSummary.total} avaliações de clientes</span>
+              <span>{testimonialsSummary.total} avaliações reais</span>
             </div>
             <div className="proposal-showcase-main">
               <Image
                 src={site.heroImage}
-                alt="Fachada da ZEISS Vision Center Araguaína"
+                alt="ZEISS Vision Center Araguaína"
                 fill
-                sizes="(min-width: 960px) 420px, 88vw"
+                sizes="(min-width: 960px) 440px, 88vw"
                 priority
               />
             </div>
-          </AnimatedReveal>
+          </div>
         </div>
       </section>
 
-      <section className="proposal-section" aria-labelledby="strategy-title">
+      <section className="proposal-section" aria-labelledby="diagnosis-title">
+        <div className="proposal-shell proposal-two-column">
+          <div className="proposal-section-heading">
+            <span className="proposal-eyebrow">Diagnóstico</span>
+            <h2 id="diagnosis-title">A reputação local já é forte.</h2>
+          </div>
+          <p className="proposal-lead">
+            A ZEISS Vision Center Araguaína já possui avaliações excelentes e
+            percepção de qualidade. O desafio digital é transformar essa
+            autoridade em uma experiência online compatível com o padrão
+            internacional da marca.
+          </p>
+        </div>
+      </section>
+
+      <section className="proposal-section" aria-labelledby="problem-title">
         <div className="proposal-shell">
-          <AnimatedReveal className="proposal-section-heading proposal-heading-center">
-            <span className="proposal-eyebrow">Estratégia</span>
-            <h2 id="strategy-title">
-              Tecnologia, confiança e bom gosto em uma jornada objetiva.
-            </h2>
+          <div className="proposal-section-heading">
+            <span className="proposal-eyebrow">Problema atual</span>
+            <h2 id="problem-title">Menos informação solta. Mais percepção de valor.</h2>
+          </div>
+          <div className="proposal-card-grid">
+            {problems.map((item, index) => (
+              <article className="proposal-glass-card" key={item}>
+                <strong>{String(index + 1).padStart(2, "0")}</strong>
+                <p>{item}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="proposal-section" aria-labelledby="solution-title">
+        <div className="proposal-shell proposal-site-card">
+          <div className="proposal-site-copy">
+            <span className="proposal-eyebrow">Solução</span>
+            <h2 id="solution-title">Uma experiência digital ZEISS, não um template de ótica.</h2>
             <p>
-              O site institucional educa e posiciona. A bio do Instagram acelera
-              a conversão no celular. A prova social dá segurança para o próximo
-              passo.
+              Visual editorial, prova social real, rotas comerciais claras e
+              presença mobile com a mesma precisão percebida dentro da loja.
             </p>
-          </AnimatedReveal>
+          </div>
 
-          <div className="proposal-pillar-grid">
-            {sections.map((section, index) => {
-              const Icon = section.icon;
-
-              return (
-                <AnimatedReveal
-                  key={section.title}
-                  className="proposal-pillar-card"
-                  delay={index * 0.05}
-                >
-                  <span className="proposal-icon">
-                    <Icon size={22} aria-hidden="true" />
-                  </span>
-                  <span className="proposal-eyebrow">{section.eyebrow}</span>
-                  <h3>{section.title}</h3>
-                  <p>{section.text}</p>
-                </AnimatedReveal>
-              );
-            })}
+          <div className="proposal-site-includes" aria-label="Soluções">
+            {solutions.map((item) => (
+              <span key={item}>
+                <Check size={16} aria-hidden="true" />
+                {item}
+              </span>
+            ))}
           </div>
         </div>
       </section>
 
       <section className="proposal-section" aria-labelledby="deliver-title">
         <div className="proposal-shell">
-          <AnimatedReveal className="proposal-site-card">
-            <div className="proposal-site-copy">
-              <span className="proposal-eyebrow">Entregáveis</span>
-              <h2 id="deliver-title">O que a atualização contempla</h2>
-              <p>
-                Uma presença digital ZEISS com estética internacional, narrativa
-                técnica e humana, SEO local e chamadas claras para atendimento
-                pelo WhatsApp.
-              </p>
-            </div>
+          <div className="proposal-section-heading proposal-heading-center">
+            <span className="proposal-eyebrow">Entregáveis</span>
+            <h2 id="deliver-title">O pacote completo para vender autoridade.</h2>
+          </div>
+          <div className="proposal-deliverable-grid">
+            {deliverables.map((item) => (
+              <span key={item}>
+                <BadgeCheck size={17} aria-hidden="true" />
+                {item}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
 
-            <div
-              className="proposal-site-includes"
-              aria-label="Entregáveis da proposta"
-            >
-              {deliverables.map((item) => (
-                <span key={item}>
-                  <Check size={16} aria-hidden="true" />
-                  {item}
-                </span>
-              ))}
-            </div>
-          </AnimatedReveal>
+      <section className="proposal-section" aria-labelledby="investment-title">
+        <div className="proposal-shell">
+          <div className="proposal-section-heading">
+            <span className="proposal-eyebrow">Investimento</span>
+            <h2 id="investment-title">Planos sóbrios, editáveis e orientados por valor.</h2>
+          </div>
+
+          <div className="proposal-plan-grid">
+            {proposalPlans.map((plan) => (
+              <article
+                className={`proposal-plan-card ${plan.recommended ? "is-featured" : ""}`}
+                key={plan.name}
+              >
+                {plan.recommended ? (
+                  <span className="proposal-plan-badge">Recomendado</span>
+                ) : null}
+                <h3>{plan.name}</h3>
+                <strong className="proposal-plan-price">{plan.price}</strong>
+                <p>{plan.description}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="proposal-section" aria-labelledby="timeline-title">
+        <div className="proposal-shell proposal-timeline-panel">
+          <div className="proposal-section-heading">
+            <span className="proposal-eyebrow">Cronograma</span>
+            <h2 id="timeline-title">Quatro momentos até a publicação.</h2>
+          </div>
+          <div className="proposal-timeline">
+            {timeline.map((item, index) => (
+              <article key={item}>
+                <Clock3 size={18} aria-hidden="true" />
+                <strong>{`${index + 1}º momento`}</strong>
+                <span>{item}</span>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
       <section className="proposal-final" aria-labelledby="final-title">
         <div className="proposal-shell">
-          <AnimatedReveal className="proposal-final-panel">
+          <div className="proposal-final-panel">
             <div className="proposal-final-icons" aria-hidden="true">
-              <Eye size={24} />
               <FileText size={24} />
               <MousePointer2 size={24} />
-              <Sparkles size={24} />
-              <MapPin size={24} />
+              <Instagram size={24} />
+              <Gem size={24} />
+              <Search size={24} />
               <MessageCircle size={24} />
             </div>
             <h2 id="final-title">
-              Aprovar a atualização é transformar reputação local em presença
-              digital compatível com a experiência ZEISS.
+              Vamos colocar a experiência digital da ZEISS Vision Center no
+              mesmo nível da experiência dentro da loja.
             </h2>
             <div className="proposal-final-actions">
-              <ProposalButton href={proposalWhatsAppUrl}>
-                Aprovar atualização do projeto
-              </ProposalButton>
-              <ProposalButton href="/" light>
-                Voltar para o site
-              </ProposalButton>
+              <ProposalButton />
             </div>
-          </AnimatedReveal>
+          </div>
         </div>
       </section>
     </main>

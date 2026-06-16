@@ -1,87 +1,79 @@
 import Image from "next/image";
-import { ArrowDown, MessageCircle, Navigation, Sparkles } from "lucide-react";
-import { GoogleRatingBadge } from "@/components/GoogleRatingBadge";
-import { buildWhatsAppUrl, site } from "@/lib/site";
-
-const experienceMessage =
-  "Olá, vim pelo site e quero conhecer a experiência ZEISS Vision Center Araguaína.";
+import { ArrowDown, MessageCircle, Star } from "lucide-react";
+import { site } from "@/lib/site";
 
 export function LensHero() {
   return (
-    <section className="olhar-hero" aria-labelledby="hero-title">
+    <section className="olhar-hero zeiss-premium-hero" aria-labelledby="hero-title">
+      <div className="premium-optic-light premium-optic-light-a" />
+      <div className="premium-optic-light premium-optic-light-b" />
+
       <div className="site-shell olhar-hero-grid">
         <div className="olhar-hero-copy">
           <Image
-            src={site.logoWide}
-            width={420}
-            height={120}
-            alt="ZEISS Vision Center"
+            src={site.logoIcon}
+            width={76}
+            height={76}
+            alt="ZEISS"
             priority
             className="olhar-hero-logo"
           />
-          <p className="eyebrow">Precisão alemã em Araguaína</p>
-          <h1 id="hero-title">Precisão alemã para enxergar melhor a vida.</h1>
+
+          <div className="premium-rating-pill">
+            <span aria-hidden="true">
+              {Array.from({ length: 5 }).map((_, index) => (
+                <Star key={index} size={13} fill="currentColor" />
+              ))}
+            </span>
+            <strong>5,0 no Google</strong>
+            <small>117 avaliações</small>
+          </div>
+
+          <h1 id="hero-title">
+            Precisão ZEISS para uma visão à altura do seu estilo.
+          </h1>
           <p>
-            Na ZEISS Vision Center Araguaína, você encontra lentes de alta
-            tecnologia, armações selecionadas e um atendimento consultivo para
-            escolher a solução visual ideal para sua rotina.
+            Lentes ZEISS, curadoria de armações e atendimento consultivo em uma
+            experiência premium no Doha Center, em Araguaína.
           </p>
 
           <div className="hero-actions">
             <a
               href={site.whatsappUrl}
               className="button button-red"
-              aria-label="Agendar atendimento pelo WhatsApp"
+              aria-label="Agendar experiência ZEISS pelo WhatsApp"
             >
               <MessageCircle size={18} aria-hidden="true" />
-              Agendar atendimento pelo WhatsApp
+              Agendar experiência ZEISS
             </a>
             <a
-              href={buildWhatsAppUrl(experienceMessage)}
+              href="#rotina"
               className="button button-ghost"
-              aria-label="Conhecer a experiência ZEISS pelo WhatsApp"
+              aria-label="Ver tecnologias ZEISS"
             >
               <ArrowDown size={18} aria-hidden="true" />
-              Conhecer a experiência ZEISS
+              Ver tecnologias
             </a>
           </div>
-
-          <GoogleRatingBadge
-            variant="inline"
-            rating={site.rating.toFixed(1).replace(".", ",")}
-            reviews={`${site.reviewCount} avaliações`}
-            className="olhar-hero-rating"
-          />
-
-          <a
-            href={site.mapsRouteUrl}
-            className="olhar-hero-address"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Abrir localização da ZEISS Vision Center Araguaína no Google Maps"
-          >
-            <Navigation size={16} aria-hidden="true" />
-            {site.displayAddress}
-          </a>
         </div>
 
         <div
           className="olhar-hero-visual"
-          aria-label="Fachada da ZEISS Vision Center Araguaína"
+          aria-label="Experiência premium ZEISS Vision Center Araguaína"
         >
           <div className="olhar-hero-media">
             <Image
               src={site.heroImage}
-              alt="Fachada iluminada da ZEISS Vision Center Araguaína"
+              alt="Ambiente da ZEISS Vision Center Araguaína"
               fill
               priority
               fetchPriority="high"
-              sizes="(max-width: 900px) 92vw, 560px"
+              sizes="(max-width: 900px) 92vw, 610px"
             />
           </div>
           <div className="olhar-hero-note">
-            <Sparkles size={18} aria-hidden="true" />
-            <span>Tecnologia ZEISS, curadoria premium e escolha consultiva.</span>
+            <span>Doha Center</span>
+            <strong>Precisão óptica, estética e atendimento consultivo.</strong>
           </div>
         </div>
       </div>

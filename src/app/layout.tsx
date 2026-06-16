@@ -4,9 +4,9 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title:
-    "ZEISS Vision Center Araguaína | Lentes ZEISS, Óculos e Atendimento Premium",
+    "ZEISS Vision Center Araguaína | Lentes ZEISS e Experiência Premium",
   description:
-    "Conheça a ZEISS Vision Center Araguaína. Lentes ZEISS, armações selecionadas, atendimento consultivo e experiência premium em tecnologia visual.",
+    "Lentes ZEISS, curadoria de armações e atendimento consultivo em uma experiência premium no Doha Center, em Araguaína.",
   keywords: [
     "ZEISS Araguaína",
     "ZEISS Vision Center Araguaína",
@@ -15,28 +15,25 @@ export const metadata: Metadata = {
     "óculos de grau Araguaína",
     "lentes progressivas Araguaína",
     "lentes para dirigir Araguaína",
-    "lentes para computador Araguaína",
-    "ótica no Setor Anhanguera",
     "ótica no Doha Center",
   ],
   icons: {
-    icon: [{ url: site.logoIcon, type: "image/jpeg" }],
+    icon: [{ url: site.logoIcon, type: "image/png" }],
     shortcut: site.logoIcon,
-    apple: [{ url: site.logoIcon, type: "image/jpeg" }],
+    apple: [{ url: site.logoIcon, type: "image/png" }],
   },
   openGraph: {
-    title:
-      "ZEISS Vision Center Araguaína | Lentes ZEISS, Óculos e Atendimento Premium",
+    title: "ZEISS Vision Center Araguaína | Precisão Óptica Premium",
     description:
-      "Lentes ZEISS, armações selecionadas, atendimento consultivo e experiência premium em tecnologia visual.",
+      "Lentes ZEISS, armações selecionadas e atendimento consultivo no Doha Center, em Araguaína.",
     locale: "pt_BR",
     type: "website",
     images: [
       {
-        url: site.logoIcon,
+        url: site.heroImage,
         width: 1200,
-        height: 1200,
-        alt: "Logo da ZEISS Vision Center Araguaína",
+        height: 630,
+        alt: "ZEISS Vision Center Araguaína",
       },
     ],
   },

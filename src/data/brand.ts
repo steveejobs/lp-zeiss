@@ -3,20 +3,20 @@ export const LINA_WHATSAPP_PHONE = WHATSAPP_PHONE;
 
 export const whatsappMessages = {
   site:
-    "Olá, vim pelo site e quero agendar um atendimento na ZEISS Vision Center Araguaína.",
-  bio: "Olá, vim pelo Instagram e quero agendar um atendimento na ZEISS Vision Center Araguaína.",
+    "Olá, vim pelo site da ZEISS Vision Center Araguaína e quero agendar um atendimento.",
+  bio: "Olá, vim pelo Instagram da ZEISS Vision Center Araguaína e quero agendar um atendimento.",
   frames:
-    "Olá, vim pelo Instagram e quero conhecer armações premium na ZEISS Vision Center Araguaína.",
+    "Olá, quero conhecer a curadoria de armações premium da ZEISS Vision Center Araguaína.",
   sunglasses:
-    "Olá, vim pelo Instagram e quero conhecer óculos de sol premium na ZEISS Vision Center Araguaína.",
+    "Olá, quero conhecer óculos de sol premium na ZEISS Vision Center Araguaína.",
   drive:
-    "Olá, vim pelo site e quero falar sobre lentes ZEISS para dirigir.",
+    "Olá, quero falar sobre lentes ZEISS DriveSafe para dirigir com mais conforto.",
   screens:
-    "Olá, vim pelo site e quero falar sobre lentes ZEISS para telas.",
+    "Olá, quero falar sobre lentes ZEISS para telas e rotina digital.",
   collections:
-    "Olá, vim pelo site e quero conhecer armações selecionadas na ZEISS Vision Center Araguaína.",
+    "Olá, quero conhecer armações selecionadas na ZEISS Vision Center Araguaína.",
   proposal:
-    "Olá, vi a proposta da ZEISS Vision Center Araguaína e quero aprovar a atualização do projeto.",
+    "Olá, vi a proposta da ZEISS Vision Center Araguaína e quero falar sobre o projeto.",
 };
 
 export function buildWhatsAppUrl(message: string, phone = WHATSAPP_PHONE) {
@@ -26,16 +26,17 @@ export function buildWhatsAppUrl(message: string, phone = WHATSAPP_PHONE) {
 export const brandColors = {
   zeissBlue: "#001E82",
   zeissBlueDeep: "#06114D",
-  electricBlue: "#18B7FF",
+  night: "#020817",
   opticalCyan: "#75D9FF",
   white: "#FFFFFF",
   silver: "#D8DEE8",
   graphite: "#111827",
-  text: "#5B6575",
+  text: "#AEB8C8",
 };
 
-const encodedAddress =
-  "ZEISS%20Vision%20Center%20Aragua%C3%ADna%20Doha%20Center%20Av.%20Jos%C3%A9%20de%20Brito%20366%20Loja%202%20Setor%20Anhanguera%20Aragua%C3%ADna%20TO%2077818-530";
+const rawAddress =
+  "Doha Center - Av. José de Brito, 366 - Loja 2 - Setor Anhanguera, Araguaína - TO, 77818-530";
+const encodedAddress = encodeURIComponent(rawAddress);
 
 export const site = {
   name: "ZEISS Vision Center Araguaína",
@@ -55,8 +56,8 @@ export const site = {
     "Doha Center - Av. José de Brito, 366 - Loja 2 - Setor Anhanguera, Araguaína - TO, 77818-530, Brasil",
   phoneDisplay: "+55 63 99301-2626",
   phoneE164: "+5563993012626",
-  instagram: "@zeissvisioncenteraraguaina",
-  instagramUrl: "https://www.instagram.com/zeissvisioncenteraraguaina/",
+  instagram: "@zeissvisioncenter_araguaina",
+  instagramUrl: "https://www.instagram.com/zeissvisioncenter_araguaina/",
   whatsappUrl: buildWhatsAppUrl(whatsappMessages.site),
   mapUrl: `https://www.google.com/maps/search/?api=1&query=${encodedAddress}`,
   mapsRouteUrl: `https://www.google.com/maps/search/?api=1&query=${encodedAddress}`,
@@ -69,11 +70,11 @@ export const site = {
   },
   paymentSummary: "Atendimento consultivo",
   mainPromise:
-    "Precisão alemã, tecnologia ZEISS e atendimento consultivo para uma experiência visual superior em Araguaína.",
+    "Precisão alemã, tecnologia ZEISS e atendimento consultivo em Araguaína.",
   promiseNote:
     "Lentes escolhidas para sua rotina, seu estilo e sua forma de enxergar.",
   logoIcon: "/galeria%20cole%C3%A7%C3%A3o/zeiss%20logo.png",
-  logoWide: "/galeria%20cole%C3%A7%C3%A3o/zeiss%20lo.jpg",
+  logoWide: "/galeria%20cole%C3%A7%C3%A3o/zeiss%20logo.png",
   heroImage: "/galeria%20cole%C3%A7%C3%A3o/qa%20(1).png",
   storeImages: [
     {
@@ -99,8 +100,7 @@ export const site = {
     {
       id: "doha-center",
       name: "Doha Center",
-      address:
-        "Doha Center - Av. José de Brito, 366 - Loja 2 - Setor Anhanguera, Araguaína - TO, 77818-530",
+      address: rawAddress,
       streetAddress: "Doha Center - Av. José de Brito, 366 - Loja 2",
       neighborhood: "Setor Anhanguera",
       postalCode: "77818-530",
@@ -114,7 +114,7 @@ export const site = {
 };
 
 export const navItems = [
-  { label: "Experiência ZEISS", href: "#experiencia" },
+  { label: "Experiência", href: "#experiencia" },
   { label: "Tecnologias", href: "#rotina" },
   { label: "Curadoria", href: "#vitrine" },
   { label: "Avaliações", href: "#avaliacoes" },
@@ -136,50 +136,38 @@ export type Testimonial = {
 
 export const testimonials: Testimonial[] = [
   {
-    name: "Cliente Google 01",
-    text: "Produto de alta qualidade. É um investimento na visão, com leveza e conforto aos olhos.",
+    name: "Neciane Gomes Pacifico",
+    text: "Produto de alta qualidade. Um investimento na visão. Atendimento de excelência.",
     rating: 5,
     source: "Google",
   },
   {
-    name: "Cliente Google 02",
-    text: "Atendimento de excelência, profissionais capacitados e explicação didática para escolher a melhor lente.",
+    name: "Helena Andrade Rocha",
+    text: "Lentes de alta qualidade, leveza e conforto aos olhos.",
     rating: 5,
     source: "Google",
   },
   {
-    name: "Cliente Google 03",
-    text: "Loja linda, elegante e acolhedora, com grande variedade de produtos e uma experiência muito agradável.",
+    name: "Eurivan Lima",
+    text: "Atendimento excelente, grande variedade de produtos e reconhecida qualidade ZEISS.",
     rating: 5,
     source: "Google",
   },
   {
-    name: "Cliente Google 04",
-    text: "Atendimento impecável. A equipe orienta com paciência e transmite segurança em cada detalhe da escolha.",
+    name: "Wagner dos Santos Mariano",
+    text: "Local acolhedor, vários modelos e atendimento muito atencioso.",
     rating: 5,
     source: "Google",
   },
   {
-    name: "Cliente Google 05",
-    text: "Lentes de alta qualidade, conforto visual e cuidado no pós-atendimento. Uma experiência premium.",
+    name: "Gabriella Verissimo",
+    text: "Loja linda, elegante, produtos de alta qualidade e atendimento impecável.",
     rating: 5,
     source: "Google",
   },
   {
-    name: "Cliente Google 06",
-    text: "Ambiente moderno, equipe atenciosa e muitas opções de armações para diferentes estilos.",
-    rating: 5,
-    source: "Google",
-  },
-  {
-    name: "Cliente Google 07",
-    text: "A diferença está no atendimento consultivo: tudo é explicado de forma clara antes da escolha.",
-    rating: 5,
-    source: "Google",
-  },
-  {
-    name: "Cliente Google 08",
-    text: "Qualidade, bom gosto e confiança. A loja entrega uma experiência acima do padrão.",
+    name: "Karina Lagares",
+    text: "Atendimento impecável, equipe atenciosa, grande variedade e lentes de alta qualidade.",
     rating: 5,
     source: "Google",
   },

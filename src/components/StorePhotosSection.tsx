@@ -4,7 +4,7 @@ import { AnimatedReveal } from "@/components/AnimatedReveal";
 import { buildWhatsAppUrl, site, whatsappMessages } from "@/lib/site";
 
 export function StorePhotosSection() {
-  const [mainImage, ...supportImages] = site.storeImages;
+  const gallery = site.storeImages.slice(0, 3);
 
   return (
     <section
@@ -13,40 +13,15 @@ export function StorePhotosSection() {
       aria-labelledby="store-photos-title"
     >
       <div className="site-shell olhar-gallery-layout">
-        <AnimatedReveal className="olhar-gallery-media">
-          <div className="olhar-gallery-main">
-            <Image
-              src={mainImage.src}
-              alt={mainImage.alt}
-              fill
-              sizes="(max-width: 900px) 92vw, 620px"
-              loading="lazy"
-            />
-          </div>
-          <div className="olhar-gallery-supports">
-            {supportImages.slice(0, 2).map((image) => (
-              <div className="olhar-gallery-small" key={image.src}>
-                <Image
-                  src={image.src}
-                  alt={image.alt}
-                  fill
-                  sizes="(max-width: 900px) 44vw, 280px"
-                  loading="lazy"
-                />
-              </div>
-            ))}
-          </div>
-        </AnimatedReveal>
-
         <AnimatedReveal className="section-heading compact olhar-gallery-copy">
-          <p className="eyebrow">Armações e curadoria</p>
+          <p className="eyebrow">Curadoria</p>
           <h2 id="store-photos-title">
-            Armações selecionadas para diferentes rostos, estilos e momentos.
+            Armações escolhidas como peça de estilo.
           </h2>
           <p>
-            Da escolha da lente à escolha da armação, cada detalhe influencia
-            conforto, estética e segurança. Nossa equipe orienta você na
-            combinação entre tecnologia óptica, design e estilo pessoal.
+            Design, proporção, conforto e personalidade. A escolha da armação
+            deve valorizar o rosto, acompanhar sua rotina e traduzir seu estilo
+            com discrição e elegância.
           </p>
           <a
             href={buildWhatsAppUrl(whatsappMessages.collections)}
@@ -54,8 +29,25 @@ export function StorePhotosSection() {
             aria-label="Conhecer armações selecionadas pelo WhatsApp"
           >
             <MessageCircle size={17} aria-hidden="true" />
-            Conhecer armações premium
+            Conhecer curadoria
           </a>
+        </AnimatedReveal>
+
+        <AnimatedReveal className="olhar-gallery-media" delay={0.06}>
+          {gallery.map((image, index) => (
+            <div
+              className={`premium-gallery-image premium-gallery-image-${index + 1}`}
+              key={image.src}
+            >
+              <Image
+                src={image.src}
+                alt={image.alt}
+                fill
+                sizes="(max-width: 900px) 92vw, 360px"
+                loading="lazy"
+              />
+            </div>
+          ))}
         </AnimatedReveal>
       </div>
     </section>

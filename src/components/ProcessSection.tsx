@@ -1,18 +1,22 @@
-import {
-  BadgeCheck,
-  Glasses,
-  HeartHandshake,
-  MessageSquareText,
-  ShieldCheck,
-} from "lucide-react";
+import { BadgeCheck, Gem, ScanEye } from "lucide-react";
 import { AnimatedReveal } from "@/components/AnimatedReveal";
 
-const experienceItems = [
-  { icon: MessageSquareText, text: "Entendimento da sua rotina visual" },
-  { icon: Glasses, text: "Curadoria de lentes e armações" },
-  { icon: BadgeCheck, text: "Orientação técnica personalizada" },
-  { icon: ShieldCheck, text: "Escolha com conforto, segurança e bom gosto" },
-  { icon: HeartHandshake, text: "Pós-atendimento e cuidado contínuo" },
+const pillars = [
+  {
+    icon: ScanEye,
+    title: "Precisão óptica",
+    text: "Tecnologia ZEISS apresentada de forma clara para sua rotina visual.",
+  },
+  {
+    icon: Gem,
+    title: "Curadoria de estilo",
+    text: "Armações escolhidas por proporção, conforto e presença.",
+  },
+  {
+    icon: BadgeCheck,
+    title: "Atendimento consultivo",
+    text: "Uma escolha orientada por uso, estética, conforto e confiança.",
+  },
 ];
 
 export function ProcessSection() {
@@ -22,33 +26,32 @@ export function ProcessSection() {
       className="section process-section olhar-experience-section"
       aria-labelledby="experience-title"
     >
-      <div className="site-shell olhar-experience-layout">
+      <div className="site-shell premium-editorial-layout">
         <AnimatedReveal className="section-heading compact">
           <p className="eyebrow">Experiência ZEISS</p>
           <h2 id="experience-title">
-            Mais que óculos. Uma experiência ZEISS para a sua visão.
+            A lente certa não é apenas uma questão de grau.
           </h2>
           <p>
-            Cada pessoa enxerga, trabalha, dirige e vive de uma forma. Por
-            isso, a escolha das lentes deve considerar mais do que o grau: deve
-            considerar rotina, estilo de vida, conforto, proteção e adaptação.
-            Na ZEISS Vision Center Araguaína, o atendimento é consultivo para
-            ajudar você a escolher com mais segurança.
+            Na ZEISS Vision Center Araguaína, cada escolha é orientada por
+            rotina, conforto, estética e tecnologia. É uma questão de
+            experiência.
           </p>
         </AnimatedReveal>
 
-        <div className="olhar-experience-list">
-          {experienceItems.map((item, index) => {
-            const Icon = item.icon;
+        <div className="premium-pillar-grid">
+          {pillars.map((pillar, index) => {
+            const Icon = pillar.icon;
 
             return (
               <AnimatedReveal
-                className="olhar-experience-item"
-                key={item.text}
-                delay={index * 0.04}
+                className="premium-pillar-card"
+                key={pillar.title}
+                delay={index * 0.05}
               >
                 <Icon size={20} aria-hidden="true" />
-                <span>{item.text}</span>
+                <h3>{pillar.title}</h3>
+                <p>{pillar.text}</p>
               </AnimatedReveal>
             );
           })}
