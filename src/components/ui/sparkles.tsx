@@ -33,7 +33,11 @@ export const SparklesCore = ({
   const controls = useAnimation();
   const generatedId = useId();
 
-  useEffect(() => setInit(true), []);
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => setInit(true));
+
+    return () => cancelAnimationFrame(frame);
+  }, []);
 
   const particlesLoaded = async (container?: Container) => {
     if (container) {
@@ -48,68 +52,72 @@ export const SparklesCore = ({
   return (
     <ParticlesProvider init={initEngine}>
       <motion.div animate={controls} className={cn("sparkles-core", className)}>
-      {init ? (
-        <Particles
-          id={id || generatedId}
-          className="sparkles-particles"
-          particlesLoaded={particlesLoaded}
-          options={{
-            background: { color: { value: background || "transparent" } },
-            fullScreen: { enable: false, zIndex: 1 },
-            fpsLimit: 60,
-            interactivity: {
-              events: {
-                onClick: { enable: true, mode: "push" },
-                onHover: { enable: false, mode: "repulse" },
-                resize: { enable: true },
-              },
-              modes: {
-                push: { quantity: 4 },
-                repulse: { distance: 200, duration: 0.4 },
-              },
-            },
-            particles: {
-              bounce: { horizontal: { value: 1 }, vertical: { value: 1 } },
-              collisions: { enable: false, mode: "bounce", overlap: { enable: true, retries: 0 } },
-              color: { value: particleColor || "#FFFFFF" },
-              effect: { close: true, options: {}, type: undefined },
-              move: {
-                direction: "none",
-                enable: true,
-                outModes: { default: "out" },
-                random: false,
-                speed: { min: 0.08, max: 0.8 },
-                straight: false,
-              },
-              number: {
-                density: { enable: true, width: 400, height: 400 },
-                limit: { mode: "delete", value: 0 },
-                value: particleDensity || 120,
-              },
-              opacity: {
-                value: { min: 0.08, max: 0.75 },
-                animation: {
-                  count: 0,
-                  enable: true,
-                  speed: speed || 1.5,
-                  decay: 0,
-                  delay: 0,
-                  sync: false,
-                  mode: "auto",
-                  startValue: "random",
-                  destroy: "none",
+        {init ? (
+          <Particles
+            id={id || generatedId}
+            className="sparkles-particles"
+            particlesLoaded={particlesLoaded}
+            options={{
+              background: { color: { value: background || "transparent" } },
+              fullScreen: { enable: false, zIndex: 1 },
+              fpsLimit: 60,
+              interactivity: {
+                events: {
+                  onClick: { enable: true, mode: "push" },
+                  onHover: { enable: false, mode: "repulse" },
+                  resize: { enable: true },
+                },
+                modes: {
+                  push: { quantity: 4 },
+                  repulse: { distance: 200, duration: 0.4 },
                 },
               },
-              shape: { close: true, options: {}, type: "circle" },
-              size: {
-                value: { min: minSize || 0.4, max: maxSize || 1.4 },
-                animation: { enable: false },
+              particles: {
+                bounce: { horizontal: { value: 1 }, vertical: { value: 1 } },
+                collisions: {
+                  enable: false,
+                  mode: "bounce",
+                  overlap: { enable: true, retries: 0 },
+                },
+                color: { value: particleColor || "#FFFFFF" },
+                effect: { close: true, options: {}, type: undefined },
+                move: {
+                  direction: "none",
+                  enable: true,
+                  outModes: { default: "out" },
+                  random: false,
+                  speed: { min: 0.08, max: 0.8 },
+                  straight: false,
+                },
+                number: {
+                  density: { enable: true, width: 400, height: 400 },
+                  limit: { mode: "delete", value: 0 },
+                  value: particleDensity || 120,
+                },
+                opacity: {
+                  value: { min: 0.08, max: 0.75 },
+                  animation: {
+                    count: 0,
+                    enable: true,
+                    speed: speed || 1.5,
+                    decay: 0,
+                    delay: 0,
+                    sync: false,
+                    mode: "auto",
+                    startValue: "random",
+                    destroy: "none",
+                  },
+                },
+                shape: { close: true, options: {}, type: "circle" },
+                size: {
+                  value: { min: minSize || 0.4, max: maxSize || 1.4 },
+                  animation: { enable: false },
+                },
+                links: { enable: false },
               },
-              links: { enable: false },
-            },
-            detectRetina: true,
-          }}
-        />
+              detectRetina: true,
+            }}
+          />
         ) : null}
       </motion.div>
     </ParticlesProvider>
